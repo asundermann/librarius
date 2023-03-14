@@ -10,16 +10,22 @@
 	<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 </head>
 
-<body class="bg-slate-600 text-white font-poppins">
-	{include "../../Components/Header/header.latte"}
+<body class="font-poppins">
 
-	<div class="container w-full">
-		{include content}
-	</div>
+	<section class="flex flex-col min-h-screen bg-black text-white bg-center bg-cover bg-[url('../../../dist/img/static/hero.png')]">
 
-	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+		{include "../../Components/Header/header.latte"}
 
+		{include "../../Components/Hero/hero.latte"
+			'title' => "JANA CVETLEROVÁ",
+			'perex' => "Photos are the memories that never fade"
+		}
 
+		<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+
+	</section>
+	<section class="min-h-screen bg-white"
+	</section>
 
 
 </body>
