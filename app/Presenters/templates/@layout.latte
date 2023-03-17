@@ -12,19 +12,25 @@
 
 <body class="font-poppins">
 
-	<section class="flex flex-col min-h-screen bg-black text-white bg-center bg-cover bg-[url('../../../dist/img/static/hero.png')]">
 
+
+	<section class="flex flex-col min-h-screen bg-black text-white bg-center bg-cover bg-[url('../../../dist/img/static/hero.png')]">
 		{include "../../Components/Header/header.latte"}
 
 		{include "../../Components/Hero/hero.latte"
 			'title' => "JANA CVETLEROVÁ",
 			'perex' => "Photos are the memories that never fade"
 		}
+		{include "../../Components/ScrollDown/scrollDown.latte"
+			'link' => '#bullshit',
+			'color' => 'white'
+		}
 
 		<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
-
 	</section>
-	<section class="min-h-screen bg-white"
+
+	<section id="bullshit" class="min-h-screen"
+
 	</section>
 
 

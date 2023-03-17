@@ -2,3 +2,5 @@ config/local.neon
 
 # Project exclude paths
 /node_modules/
+/temp/
+/vendor/
