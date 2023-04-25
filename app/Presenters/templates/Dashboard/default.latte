@@ -1,2 +1,8 @@
 {block pageContent}
-<h1> Dashboard</h1>
+<h1 class="text-2xl text-center"> Dashboard</h1>
+<p>
+    {foreach $user as $users}
+        {$users->firstname}
+        {$users->lastname}
+    {/foreach}
+</p>

@@ -1,4 +1,4 @@
-config/local.neon
+config/database.neon
 
 # Project exclude paths
 /node_modules/
