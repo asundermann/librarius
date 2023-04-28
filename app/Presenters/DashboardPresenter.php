@@ -20,6 +20,17 @@ final class DashboardPresenter extends Nette\Application\UI\Presenter
         $this->users = $users;
     }
 
+    public function startup()
+    {
+        parent::startup();
+
+        if (!$this->getUser()->isLoggedIn())
+        {
+            $this->redirect('Login:default');
+            $this->terminate();
+        }
+
+    }
     public function renderDefault(){
         $this->template->user = $this->users->findAll();
 

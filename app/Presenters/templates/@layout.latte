@@ -12,7 +12,9 @@
 
 <body class="font-poppins">
 
-	<div n:foreach="$flashes as $flash">{$flash->message}</div>
+	<div n:foreach="$flashes as $flash">
+		{$flash->message}
+	</div>
 	{include pageContent}
 
 </body>
