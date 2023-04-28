@@ -14,15 +14,26 @@ final class LoginPresenter extends Nette\Application\UI\Presenter
 
     /** @var Model\UsersRepository */
     private $users;
+    private $passwords;
 
-    public function __construct(Model\UsersRepository $users)
+    public function __construct(Model\UsersRepository $users, Nette\Security\Passwords $passwords)
     {
         $this->users = $users;
+        $this->passwords = $passwords;
     }
 
     public function renderDefault()
     {
-        bdump($this->users->findAll()->fetch());
+    }
+
+    public function actionMaintenance()
+    {
+        $password = $this->passwords->hash("test");
+        $this->users->findAll()->insert([
+            'username' => "pietro",
+            'password' => $password,
+            'role' => "admin"
+        ]);
     }
 
     protected function createComponentLoginForm(): Form
@@ -40,19 +51,16 @@ final class LoginPresenter extends Nette\Application\UI\Presenter
 
     public function loginFormSucceeded($loginForm, $data){
 
-        $users = $this->users->findAll()->fetchAll();
-        $username = $data['username'];
-        $password = $data['password'];
+//        $this->flashMessage("tralala");
 
         try {
-            $this->getUser()->login($username,$password);
+            $this->getUser()->login($data->username,$data->password);
         }catch (Nette\Security\AuthenticationException $e) {
-            $loginForm->addError($e->getMessage());
-            return;
+            $this->flashMessage($e->getMessage());
+            $this->redirect('Login:default');
         }
-        $this->redirect('Dashboard:default');
 
-//        $this->flashMessage('Byl jsi úspěšně přihlášen');
+        $this->redirect('Dashboard:default');
     }
 
 }

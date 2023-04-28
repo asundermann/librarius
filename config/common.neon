@@ -14,7 +14,3 @@ di:
 	export:
 		parameters: no
 		tags: no
-
-security:
-	users:
-		test: test
