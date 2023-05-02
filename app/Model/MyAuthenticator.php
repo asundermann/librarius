@@ -21,11 +21,11 @@ class MyAuthenticator implements Nette\Security\Authenticator
             ->fetch();
 
         if (!$row) {
-            throw new Nette\Security\AuthenticationException('User not found.');
+            throw new Nette\Security\AuthenticationException('Uživatel nenalezen.');
         }
 
         if (!$this->passwords->verify($password, $row->password)) {
-            throw new Nette\Security\AuthenticationException('Invalid password.');
+            throw new Nette\Security\AuthenticationException('Špatné heslo.');
         }
 
         return new SimpleIdentity($row->id, $row->role, ['username' => $row->username]);

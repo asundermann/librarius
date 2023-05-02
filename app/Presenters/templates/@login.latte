@@ -11,7 +11,9 @@
     </head>
 
     <body class="font-poppins">
-        <section class="flex flex-col absolute w-full h-full">
+    <div n:foreach="$flashes as $flash" class="p-4 bg-rose-600 text-white w-full text-center">{$flash->message}</div>
+
+    <section class="flex flex-col absolute w-full h-full">
             <div class="flex justify-center relative top-[30%]">
             <div class="p-12 w-[500px] bg-slate-200 text-center">
                 <h2 class="text-2xl pb-6">Přihlášení</h2>

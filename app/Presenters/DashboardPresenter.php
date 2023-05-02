@@ -20,9 +20,31 @@ final class DashboardPresenter extends Nette\Application\UI\Presenter
         $this->users = $users;
     }
 
+    public  function  beforeRender()
+    {
+        parent::beforeRender();
+
+        $this->template->navItems =
+        [
+            'Overview' => (object) [
+                'presenter' => 'Dashboard:default',
+                'title' => 'Přehled',
+
+            ],
+            'Main' => (object) [
+                'presenter' => 'Dashboard:main',
+                'title' => 'Hlavní',
+            ]
+        ];
+
+    }
+
     public function startup()
     {
         parent::startup();
+
+        $loggedUserId = $this->getUser()->getId();
+        $this->template->loggedUser = $this->users->findAll()->where('id',$loggedUserId)->fetch();
 
         if (!$this->getUser()->isLoggedIn())
         {
@@ -33,8 +55,9 @@ final class DashboardPresenter extends Nette\Application\UI\Presenter
     }
     public function renderDefault(){
 //        $this->template->user = $this->users->findAll();
-        $loggedUserId = $this->getUser()->getId();
-        $this->template->loggedUser = $this->users->findAll()->where('id',$loggedUserId)->fetch();
+    }
+
+    public function renderMain(){
     }
 
 }
