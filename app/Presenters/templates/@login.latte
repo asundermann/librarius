@@ -11,7 +11,9 @@
     </head>
 
     <body class="font-poppins">
-    <div n:foreach="$flashes as $flash" class="p-4 bg-rose-600 text-white w-full text-center">{$flash->message}</div>
+    <div n:foreach="$flashes as $flash"
+            n:class="$flash->type == 'success' ?'bg-green-400':'bg-rose-600','p-4 text-white w-full text-center'">{$flash->message}
+    </div>
 
     <section class="flex flex-col absolute w-full h-full">
             <div class="flex justify-center relative top-[30%]">

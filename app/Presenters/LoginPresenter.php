@@ -71,7 +71,7 @@ final class LoginPresenter extends Nette\Application\UI\Presenter
     public function actionOut()
     {
         $this->getUser()->logout();
-        $this->flashMessage('Byl/a jsi úspěšně odhlášen.');
+        $this->flashMessage('Byl/a jsi úspěšně odhlášen.','success');
         $this->redirect('Login:default');
     }
 }

@@ -12,7 +12,9 @@
 
 	<body class="font-poppins">
 
-		<div n:foreach="$flashes as $flash" class="p-4 bg-rose-600 text-white w-full text-center">{$flash->message}</div>
+	<div n:foreach="$flashes as $flash"
+            n:class="$flash->type == 'success' ?'bg-green-400':'bg-rose-600','p-4 text-white w-full text-center'">{$flash->message}
+	</div>
 
 		<div class="flex phone:flex-col sm:flex-row justify-end p-3 bg-slate-200 items-center ">
 			<div class="flex">
