@@ -24,12 +24,19 @@ final class LoginPresenter extends Nette\Application\UI\Presenter
 
     public function renderDefault()
     {
+        $this->setLayout('login');
+
+        if ($this->getUser()->isLoggedIn())
+        {
+            $this->redirect('Dashboard:default');
+        }
     }
 
     public function actionMaintenance()
     {
         $password = $this->passwords->hash("test");
-        $this->users->findAll()->insert([
+        $this->users->findAll()->insert
+        ([
             'username' => "pietro",
             'password' => $password,
             'role' => "admin"
@@ -49,10 +56,8 @@ final class LoginPresenter extends Nette\Application\UI\Presenter
         return $loginForm;
     }
 
-    public function loginFormSucceeded($loginForm, $data){
-
-//        $this->flashMessage("tralala");
-
+    public function loginFormSucceeded($loginForm, $data)
+    {
         try {
             $this->getUser()->login($data->username,$data->password);
         }catch (Nette\Security\AuthenticationException $e) {
@@ -63,4 +68,10 @@ final class LoginPresenter extends Nette\Application\UI\Presenter
         $this->redirect('Dashboard:default');
     }
 
+    public function actionOut()
+    {
+        $this->getUser()->logout();
+        $this->flashMessage('Byl/a jsi úspěšně odhlášen.');
+        $this->redirect('Login:default');
+    }
 }

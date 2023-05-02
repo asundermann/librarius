@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>{ifset title}{include title|stripHtml}{/ifset}</title>
+        <link rel="stylesheet" href="{$basePath}/dist/output.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    </head>
+
+    <body class="font-poppins">
+        <section class="flex flex-col absolute w-full h-full">
+            <div class="flex justify-center relative top-[30%]">
+            <div class="p-12 w-[500px] bg-slate-200 text-center">
+                <h2 class="text-2xl pb-6">Přihlášení</h2>
+
+                <form n:name="loginForm">
+
+                    <div>
+                        <label n:name=username>Přihlašovací jméno <br>
+                            <input n:name=username size=20 autofocus class="mt-2 p-2"></label>
+                    </div>
+
+                    <div class="mt-2">
+                        <label n:name=password>Heslo <br>
+                            <input n:name=password class="mt-2  p-2"></label>
+                    </div>
+
+                    <div class="mt-6">
+                        <label n:name=keepLoggedIn>Zůstat přihlášen <br>
+                            <input n:name=keepLoggedIn class="mt-2 p-2"></label>
+                    </div>
+
+                    <div>
+                        <input n:name=send class="mt-4 bg-slate-600 text-white py-4 px-10 cursor-pointer">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        </section>
+    </body>
+</html>

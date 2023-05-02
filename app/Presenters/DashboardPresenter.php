@@ -32,8 +32,9 @@ final class DashboardPresenter extends Nette\Application\UI\Presenter
 
     }
     public function renderDefault(){
-        $this->template->user = $this->users->findAll();
-
+//        $this->template->user = $this->users->findAll();
+        $loggedUserId = $this->getUser()->getId();
+        $this->template->loggedUser = $this->users->findAll()->where('id',$loggedUserId)->fetch();
     }
 
 }
