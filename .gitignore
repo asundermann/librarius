@@ -2,5 +2,5 @@ config/database.neon
 
 # Project exclude paths
 /node_modules/
-/www/dist/output.css
+/www/dist/css/output.css
 /vendor/
