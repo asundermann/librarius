@@ -5,6 +5,6 @@
     "tailwindcss": "^3.2.4"
   },
   "scripts": {
-    "build": "npx tailwindcss -i dev/css/input.css -o ./www/dist/output.css --watch"
+    "build": "npx tailwindcss -i dev/css/input.css -o www/dist/css/output.css --watch"
   }
 }
