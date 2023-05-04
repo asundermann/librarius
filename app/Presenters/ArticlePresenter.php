@@ -9,7 +9,7 @@ use App\Model,
     Nette\Application\UI\Form;
 
 
-final class DashboardPresenter extends BasePresenter
+final class ArticlePresenter extends BasePresenter
 {
 
     public function startup()
@@ -23,7 +23,6 @@ final class DashboardPresenter extends BasePresenter
 
     }
     public function renderDefault(){
-//        $this->template->user = $this->users->findAll();
     }
 
     public function renderMain(){

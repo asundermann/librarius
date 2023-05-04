@@ -37,10 +37,12 @@ final class LoginPresenter extends Nette\Application\UI\Presenter
         $password = $this->passwords->hash("test");
         $this->users->findAll()->insert
         ([
-            'username' => "pietro",
+            'email' => "test@testovic.cz",
+            'username' => "test",
             'password' => $password,
             'role' => "admin"
         ]);
+        $this->redirect('Dashboard:default');
     }
 
     protected function createComponentLoginForm(): Form
