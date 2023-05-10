@@ -3,3 +3,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.wysiwyg-wrapper {
+    height: 300px;
+}
+.ck-editor,
+.js-wysiwyg {
+    height: 100% !important;
+}
+
+.ck-editor__main {
+    height: calc(100% - 60px) !important;
+}
+
+.ck-editor__editable {
+    height: 100%;
+}
