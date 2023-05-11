@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace App\Presenters;
 
 use Nette,
-    App\Model,
+    App\Model\UsersRepository,
     Nette\Application\UI\Form;
 
 
 final class LoginPresenter extends Nette\Application\UI\Presenter
 {
 
-    /** @var Model\UsersRepository */
+    /** @var UsersRepository */
     private $users;
     private $passwords;
 
-    public function __construct(Model\UsersRepository $users, Nette\Security\Passwords $passwords)
+    public function __construct(UsersRepository $users, Nette\Security\Passwords $passwords)
     {
         $this->users = $users;
         $this->passwords = $passwords;
@@ -47,18 +47,18 @@ final class LoginPresenter extends Nette\Application\UI\Presenter
 
     protected function createComponentLoginForm(): Form
     {
-        $loginForm = new Form();
-        $loginForm->addText('username','Přihlašovací jméno')
+        $form = new Form();
+        $form->addText(UsersRepository::PRIMARY_TABLE_USERNAME,'Přihlašovací jméno')
             ->setRequired();
-        $loginForm->addPassword('password','Heslo')
+        $form->addPassword(UsersRepository::PRIMARY_TABLE_PASSWORD,'Heslo')
             ->setRequired();
-        $loginForm->addCheckbox('keepLoggedIn','Zůstat přihlášen');
-        $loginForm->addSubmit('send',"Potvrdit");
-        $loginForm->onSuccess[] = [$this, 'loginFormSucceeded'];
-        return $loginForm;
+//        $form->addCheckbox('keepLoggedIn','Zůstat přihlášen');
+        $form->addSubmit('send',"Potvrdit");
+        $form->onSuccess[] = [$this, 'loginFormSucceeded'];
+        return $form;
     }
 
-    public function loginFormSucceeded($loginForm, $data)
+    public function loginFormSucceeded($form, $data)
     {
         try {
             $this->getUser()->login($data->username,$data->password);

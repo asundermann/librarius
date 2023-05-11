@@ -56,7 +56,8 @@ final class ArticlePresenter extends BasePresenter
             ->setHtmlType('date')
             ->setRequired();
 
-        $form->addSubmit('send','Vytvořit');
+        $form->addSubmit('send','Vytvořit')
+        ->setHtmlAttribute('id','send');
         $form->onSuccess[] = [$this,'articleFormSucceeded'];
 
         return $form;
