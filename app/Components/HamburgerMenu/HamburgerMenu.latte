@@ -1,0 +1,17 @@
+
+<div id="burger-menu" class="phone:flex sm:hidden md:hidden justify-end items-center p-4 mx-2">
+    <span></span>
+</div>
+
+<div id="menu">
+    <ul n:inner-foreach="$navItems as $item">
+        <li>
+            <a n:class="$presenter->isLinkCurrent() ? 'text-white bg-white/30','p-6 w-full self-stretch pl-3 rounded space-x-2 transition-all duration-200'"
+                n:href="{$item->presenter}">
+                {$item->title}
+            </a>
+        </li>
+    </ul>
+</div>
+
+
