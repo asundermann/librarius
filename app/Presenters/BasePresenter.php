@@ -14,9 +14,13 @@ class BasePresenter extends Nette\Application\UI\Presenter
     /** @var Model\UsersRepository */
     public $users;
 
-    public function __construct(Model\UsersRepository $users)
+    /** @var Model\ArticleRepository */
+    public $articles;
+
+    public function __construct(Model\UsersRepository $users, Model\ArticleRepository $articles)
     {
         $this->users = $users;
+        $this->articles = $articles;
     }
 
     public  function  beforeRender()

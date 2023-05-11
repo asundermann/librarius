@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace App\Presenters;
 
-use App\Model,
-    Nette,
-    Nette\Application\UI\Form;
+use Nette,
+    App\Model\ArticleRepository,
+    Nette\Application\UI\Form,
+    Ublaboo\DataGrid\DataGrid;
 
 
 final class ArticlePresenter extends BasePresenter
 {
-
     public function startup()
     {
         parent::startup();
@@ -30,23 +30,43 @@ final class ArticlePresenter extends BasePresenter
     {
     }
 
+    public function createComponentGrid($name)
+    {
+        $grid = new DataGrid($this, $name);
+
+        $grid->setDataSource($this->users->findAll());
+        $grid->addColumnText('username', 'Jméno');
+    }
+
+
     protected function createComponentArticleForm()
     {
 //        $caption = $this->record ? 'Upravit článek':'Vytvořit článek';
         $form = new Form;
-        $form->addText('title','Titulek',)
+        $form->addText(ArticleRepository::PRIMARY_TABLE_TITLE,'Titulek',)
+            ->setDefaultValue('Titulek')
             ->setRequired();
-        $form->addText('perex','Perex')
+        $form->addText(ArticleRepository::PRIMARY_TABLE_PEREX,'Perex')
+            ->setDefaultValue('Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam quis nulla. Maecenas lorem. Cum sociis natoque penatibus et magnis dis parturient montes.')
             ->setRequired();
-        $form->addTextArea('content','Obsah')
-            ->setRequired();
-        $form->addText('date','Datum publikace')
+        $form->addTextArea(ArticleRepository::PRIMARY_TABLE_CONTENT,'Obsah')
+            ->setHtmlAttribute('class','js-wysiwyg');
+        $form->addText(ArticleRepository::PRIMARY_TABLE_DATE_CREATED,'Datum publikace')
+            ->setDefaultValue('2023-05-26')
             ->setHtmlType('date')
             ->setRequired();
 
         $form->addSubmit('send','Vytvořit');
-        $form->onSuccess[] = [$this,'articleFormSuccess'];
+        $form->onSuccess[] = [$this,'articleFormSucceeded'];
 
         return $form;
     }
+
+    public function articleFormSucceeded($form, $data)
+    {
+//        $this->articles->insertArticle($data);
+        bdump($data);
+//        $this->redirect('Article:default');
+    }
+
 }
