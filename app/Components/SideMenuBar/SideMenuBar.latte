@@ -1,12 +1,12 @@
-{var $active = 'text-white bg-white/10'}
+{*{var $active = }*}
 
-<aside class="w-72 bg-[#1c212c] min-h-full h-screen flex flex-col items-center pt-5 pb-2 space-y-7">
+<aside class="phone:hidden sm:hidden md:hidden lg:flex w-72 bg-[#1c212c] min-h-full h-screen flex-col items-center pt-5 pb-2 space-y-7">
 
     <div class="w-full pr-3 flex flex-col gap-y-1 text-gray-500 fill-gray-500 text-sm">
 
         <div class="pl-2 text-gray-400/60 text-xs text-[11px] uppercase text-lg">Menu</div>
             <div class="flex flex-col" n:inner-foreach="$navItems as $item">
-                <a n:class="$presenter->isLinkCurrent() ? $active,'p-6 hover:bg-white/10 w-full self-stretch pl-3 rounded space-x-2 transition-all duration-200'" n:href="{$item->presenter}">
+                <a n:class="$presenter->isLinkCurrent() ? 'text-white bg-white/10','p-6 hover:bg-white/10 w-full self-stretch pl-3 rounded space-x-2 transition-all duration-200'" n:href="{$item->presenter}">
                     {$item->title}
                 </a>
             </div>
