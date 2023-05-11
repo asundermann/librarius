@@ -71,14 +71,14 @@
     visibility: visible;
     opacity: 1;
     padding-top:100px;
-    background:rgba(0,0,0,0.6);
+    background:rgb(226 232 240 / var(--tw-bg-opacity));
 }
 
 #menu li{
     list-style:none;
 }
 #menu a{
-    color:#fff;
+    color:#000;
     display:block;
     font-size: 20px;
     margin-bottom:30px;
