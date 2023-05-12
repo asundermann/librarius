@@ -64,6 +64,7 @@ final class ArticlePresenter extends BasePresenter
 
     public function articleFormSucceeded($form, $data)
     {
+        // TODO i have to fetch JS data from wysiwyg and send them to DB...
 //        $this->articles->insertArticle($data);
         bdump($data);
 //        $this->redirect('Article:default');
