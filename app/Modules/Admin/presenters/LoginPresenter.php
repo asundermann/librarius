@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Presenters;
+namespace App\Modules\Admin\presenters;
 
-use Nette,
-    App\Model\UsersRepository,
-    Nette\Application\UI\Form;
+use App\Model\UsersRepository;
+use Nette;
+use Nette\Application\UI\Form;
 
 
 final class LoginPresenter extends Nette\Application\UI\Presenter

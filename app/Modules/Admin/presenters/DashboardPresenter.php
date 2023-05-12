@@ -2,11 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Presenters;
-
-use App\Model,
-    Nette,
-    Nette\Application\UI\Form;
+namespace App\Modules\Admin\presenters;
 
 
 final class DashboardPresenter extends BasePresenter

@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Presenters;
+namespace App\Modules\Admin\presenters;
 
-use Nette,
-    App\Model\ArticleRepository,
-    Nette\Application\UI\Form,
-    Ublaboo\DataGrid\DataGrid;
+use App\Model\ArticleRepository;
+use Nette\Application\UI\Form;
+use Ublaboo\DataGrid\DataGrid;
 
 
 final class ArticlePresenter extends BasePresenter

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Presenters;
+namespace App\Modules\Admin\presenters;
 
-use App\Model,
-    Nette;
+use App\Model;
+use Nette;
 
 
 class BasePresenter extends Nette\Application\UI\Presenter
