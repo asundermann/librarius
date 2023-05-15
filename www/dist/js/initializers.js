@@ -1,8 +1,9 @@
 import "./ckeditor/ckeditor.js"
-
+import {initHamburgerMenu} from "./components/HamburgerMenu";
+import {initFlashMessageTimout} from "./components/FadeOut";
 let editor;
 
-export function initCKEditor() {
+function initCKEditor() {
     // use observer to reduce load on JS engine
     // eg: many instances are used in form multipliers
     window.CKObserver =
@@ -113,19 +114,13 @@ export function initCKEditor() {
     })
 }
 
-function initHamburgerMenu()
-{
-    var burgerMenu = document.getElementById('burger-menu');
-    var overlay = document.getElementById('menu');
-    burgerMenu.addEventListener('click',function(){
-        this.classList.toggle("close");
-        overlay.classList.toggle("overlay");
-    });
-}
 
 
 
 export async function initAll() {
     initCKEditor()
     initHamburgerMenu()
+    initFlashMessageTimout()
 }
+
+

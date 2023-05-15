@@ -1,0 +1,27 @@
+#snippet-grid-table thead {
+    background-color: #e5e7eb;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+#snippet-grid-table thead input {
+    margin-bottom: 1rem;
+    border: 1px solid #61646c;
+}
+
+.col-action.col-action {
+    text-align: right;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #e5e7eb;
+}
+
+.fa-caret-down:before {
+    content: "▼";
+}
+
+.fa-caret-up:before {
+    content: "▲";
+}
+
