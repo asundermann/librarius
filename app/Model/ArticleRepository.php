@@ -10,8 +10,8 @@ class ArticleRepository
           PRIMARY_TABLE_TITLE = 'title',
           PRIMARY_TABLE_CONTENT = 'content',
           PRIMARY_TABLE_PEREX = 'perex',
-          PRIMARY_TABLE_DATE_CREATED = 'date_created',
-          PRIMARY_TABLE_DATE_EDITED = 'date_edited';
+          PRIMARY_TABLE_DATE_PUBLISH = 'date_publish',
+          PRIMARY_TABLE_DATE_CREATED = 'date_created';
 
 
     /** @var Nette\Database\Context */
