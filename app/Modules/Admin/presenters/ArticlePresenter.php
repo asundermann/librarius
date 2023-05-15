@@ -91,7 +91,8 @@ final class ArticlePresenter extends BasePresenter
             ->setDefaultValue('Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam quis nulla. Maecenas lorem. Cum sociis natoque penatibus et magnis dis parturient montes.')
             ->setRequired();
         $form->addTextArea(ArticleRepository::PRIMARY_TABLE_CONTENT,'Obsah')
-            ->setHtmlAttribute('class','js-wysiwyg');
+            ->setOption('class', 'wysiwyg-wrapper')
+            ->setHtmlAttribute('class', 'js-wysiwyg');
         $form->addText(ArticleRepository::PRIMARY_TABLE_DATE_PUBLISH,'Datum publikace')
             ->setDefaultValue('2023-05-26')
             ->setHtmlType('date')
@@ -106,7 +107,6 @@ final class ArticlePresenter extends BasePresenter
 
     public function articleFormSucceeded($form, $data)
     {
-        // TODO i have to fetch JS data from wysiwyg and send them to DB...
         $this->articles->insertArticle($data);
         $this->flashMessage('Článek přidán úspěšně', 'success');
 //        bdump($data);
