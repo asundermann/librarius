@@ -29,6 +29,19 @@ final class ArticlePresenter extends BasePresenter
     {
     }
 
+    public function renderEdit($id)
+    {
+        $article = $this->articles
+                   ->getArticleById($id);
+
+        if (!$article) {
+            $this->error('Článek nenalezen!');
+        }
+
+        $this->getComponent('articleForm')
+            ->setDefaults($article->toArray());
+    }
+
     public function createComponentGrid($name): DataGrid
     {
         $grid = new DataGrid($this, $name);
@@ -82,24 +95,22 @@ final class ArticlePresenter extends BasePresenter
 
     protected function createComponentArticleForm()
     {
-//        $caption = $this->record ? 'Upravit článek':'Vytvořit článek';
+        $presenter = $this->getAction();
+        $caption = $presenter == 'add' ? 'Vytvořit' : 'Upravit';
+
         $form = new Form;
         $form->addText(ArticleRepository::PRIMARY_TABLE_TITLE,'Titulek',)
-            ->setDefaultValue('Titulek')
             ->setRequired();
         $form->addText(ArticleRepository::PRIMARY_TABLE_PEREX,'Perex')
-            ->setDefaultValue('Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam quis nulla. Maecenas lorem. Cum sociis natoque penatibus et magnis dis parturient montes.')
             ->setRequired();
         $form->addTextArea(ArticleRepository::PRIMARY_TABLE_CONTENT,'Obsah')
-            ->setDefaultValue("<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam quis nulla. Maecenas lorem. Cum sociis natoque <strong>penatibus</strong> et magnis dis parturient montes.</p>")
             ->setOption('class', 'wysiwyg-wrapper')
             ->setHtmlAttribute('class', 'js-wysiwyg');
         $form->addText(ArticleRepository::PRIMARY_TABLE_DATE_PUBLISH,'Datum publikace')
-            ->setDefaultValue('2023-05-26')
             ->setHtmlType('date')
             ->setRequired();
 
-        $form->addSubmit('send','Vytvořit')
+        $form->addSubmit('send',$caption)
         ->setHtmlAttribute('id','send');
         $form->onSuccess[] = [$this,'articleFormSucceeded'];
 
@@ -108,10 +119,22 @@ final class ArticlePresenter extends BasePresenter
 
     public function articleFormSucceeded($form, $data)
     {
-//        $this->articles->insertArticle($data);
-        $this->flashMessage('Článek přidán úspěšně', 'success');
-//        bdump($data);
-//        $this->redirect('Article:default');
+
+        $articleId = $this->getParameter('id');
+
+        if ($articleId) {
+            $this->articles
+            ->updateArticle($articleId,$data);
+            $this->flashMessage('Článek byl upraven', 'success');
+
+        } else {
+            $post = $this->articles
+            ->insertArticle($data);
+            $this->flashMessage('Článek byl přidán', 'success');
+            $this->redirect('Article:edit',$post->id);
+
+        }
+
     }
 
 }

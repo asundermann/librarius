@@ -2,6 +2,7 @@
 namespace App\Model;
 
 use Nette;
+use Nette\Database\Table\Selection;
 
 class ArticleRepository
 {
@@ -28,9 +29,27 @@ class ArticleRepository
         return $this->database->table(self::PRIMARY_TABLE);
     }
 
+    public function findArticleById(int $id): Selection
+    {
+        return $this->database
+            ->table(self::PRIMARY_TABLE)
+            ->where('id', $id);
+    }
+
     public function insertArticle($data)
     {
         return $this->findAll()->insert($data);
     }
+
+    public function updateArticle($articleId,$data)
+    {
+        return $this->getArticleById($articleId)->update($data);
+    }
+
+    public function getArticleById($id)
+    {
+        return $this->findAll()->get($id);
+    }
+
 
 }
