@@ -1,8 +1,10 @@
 <?php
 namespace App\Model;
 
-use Nette;
-use Nette\Database\Table\Selection;
+use Nette,
+ Nette\Database\Table\Selection,
+ Nette\Database\Table\ActiveRow,
+ Exception;
 
 class ArticleRepository
 {
@@ -23,8 +25,7 @@ class ArticleRepository
         $this->database = $database;
     }
 
-    /** @return Nette\Database\Table\Selection */
-    public function findAll()
+    public function findAll(): Selection
     {
         return $this->database->table(self::PRIMARY_TABLE);
     }
@@ -46,10 +47,20 @@ class ArticleRepository
         return $this->getArticleById($articleId)->update($data);
     }
 
-    public function getArticleById($id)
+    public function getArticleById($id): ActiveRow
     {
         return $this->findAll()->get($id);
     }
 
+    public function deleteArticle($id)
+    {
+        $row = $this->findArticleById($id);
+
+        $article = $row->fetch();
+        if (!$article) {
+            throw new Exception('Record does not exist');
+        }
+        $row->delete();
+    }
 
 }

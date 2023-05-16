@@ -6,8 +6,9 @@ namespace App\Modules\Admin\presenters;
 
 use App\Model\ArticleRepository,
     Nette\Application\UI\Form,
-    Ublaboo\DataGrid\DataGrid;
-use Ublaboo\DataGrid\Localization\SimpleTranslator;
+    Ublaboo\DataGrid\DataGrid,
+    Ublaboo\DataGrid\Column\Action\Confirmation\StringConfirmation,
+    Ublaboo\DataGrid\Localization\SimpleTranslator;
 
 final class ArticlePresenter extends BasePresenter
 {
@@ -21,6 +22,7 @@ final class ArticlePresenter extends BasePresenter
         }
 
     }
+
     public function renderDefault()
     {
     }
@@ -29,7 +31,7 @@ final class ArticlePresenter extends BasePresenter
     {
     }
 
-    public function renderEdit($id)
+    public function actionEdit($id)
     {
         $article = $this->articles
                    ->getArticleById($id);
@@ -38,8 +40,22 @@ final class ArticlePresenter extends BasePresenter
             $this->error('Článek nenalezen!');
         }
 
+        $date = date_format($article->date_publish,'Y-m-d');
+        $articleArray = $article->toArray();
+        $defaults = array_replace($articleArray,['date_publish'=> $date]);
+
         $this->getComponent('articleForm')
-            ->setDefaults($article->toArray());
+            ->setDefaults($defaults);
+    }
+
+    public function actionDelete($id){
+        try {
+            $this->articles->deleteArticle($id);
+            $this->flashMessage('Článek byl úspěšně smazán','success');
+        } catch (Exception $e) {
+            $this->flashMessage($e->getMessage(), 'warning');
+        }
+        $this->redirect('default');
     }
 
     public function createComponentGrid($name): DataGrid
@@ -87,11 +103,11 @@ final class ArticlePresenter extends BasePresenter
         ->setTitle('Editovat');
         $grid->addAction('delete', '')
             ->setIcon('trash')
-            ->setTitle('Smazat');
+            ->setTitle('Smazat')
+           ->setConfirmation(new StringConfirmation('Chcete odstranit tento článek?'));
 
         return $grid;
     }
-
 
     protected function createComponentArticleForm()
     {
