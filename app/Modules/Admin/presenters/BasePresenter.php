@@ -34,10 +34,6 @@ class BasePresenter extends Nette\Application\UI\Presenter
                 'title' => 'Přehled',
 
             ],
-            'Main' => (object) [
-                'presenter' => 'Dashboard:main',
-                'title' => 'Hlavní',
-            ],
             'Articles' => (object) [
                 'presenter' => 'Article:default',
                 'title' => 'Články',

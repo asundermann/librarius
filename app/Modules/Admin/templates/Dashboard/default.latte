@@ -2,11 +2,21 @@
     <section class="h-full w-full">
         <div class="p-6">
             <h1 class="text-2xl mb-2">Přehled</h1><hr>
-            <div class="mt-6">kvekkekvek</div>
+            <div class="mt-6">Zde bude např. přehled objednávek</div>
         </div>
-    {*    <p>*}
-    {*        {foreach $user as $users}*}
-    {*            {$users->username}*}
-    {*        {/foreach}*}
-    {*    </p>*}
+
+        <div class="p-6 flex flex-wrap h-full w-full">
+
+{*            TODO its for cycle now, for testing purposes             *}
+            {for $i = 0; $i < 10; $i++}
+                <div class="p-4 m-6 border-2 border-slate-200">
+                    <p>Jméno Příjmení</p>
+                    <p>Objednávka</p>
+                    <p class="mb-2">Čas od: do:</p>
+                    <hr>
+                    <p class="mt-2">Poznámka (truncate)</p>
+                </div>
+            {/for}
+        </div>
+
     </section>

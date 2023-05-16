@@ -18,11 +18,9 @@ final class DashboardPresenter extends BasePresenter
         }
 
     }
-    public function renderDefault(){
-//        $this->template->user = $this->users->findAll();
+    public function renderDefault()
+    {
     }
 
-    public function renderMain(){
-    }
 
 }
