@@ -1,0 +1,25 @@
+{block pageContent}
+<section class="h-full w-full">
+    <div class="p-6">
+        <h1 class="text-2xl mb-2">Uživatelé</h1><hr>
+    </div>
+
+
+    <div class="p-6">
+
+        <div class="mb-10">
+            {include '../../../../Components/ActionButton/ActionButton.latte',
+            "link" => "Users:add",
+            "text" => "Přidat uživatele"
+            }
+        </div>
+
+        <div class="h-full w-full">
+            {control grid}
+        </div>
+
+    </div>
+
+
+
+</section>

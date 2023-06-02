@@ -1,0 +1,45 @@
+{block pageContent}
+
+{var $inputStyle = 'mt-2 p-2 border-solid border-2 border border-slate-200 w-full'}
+    <section class="h-full w-full">
+        <div class="p-6">
+            <h1 class="text-2xl mb-2">Vytvořit uživatele</h1><hr>
+
+            <div class="mx-6 mt-6">
+                <form n:name="usersForm">
+
+                    <div>
+                        <label n:name=email>E-mail<br>
+                            <input n:name=email size=20 autofocus class="{$inputStyle}">
+                        </label>
+                    </div>
+
+
+                    <div class="mt-2">
+                        <label n:name=username>Přihlašovací jméno<br>
+                            <input n:name=username class="{$inputStyle}">
+                        </label>
+                    </div>
+
+                    <div class="mt-2">
+                        <label n:name=password>Heslo<br>
+                            <input n:name=password class="{$inputStyle}">
+                        </label>
+                    </div>
+
+                    <div class="mt-2">
+                        {foreach $form[role]->getItems() as $key => $label}
+                            <label n:name="role:$key"><input n:name="role:$key"> {$label}</label>
+                        {/foreach}
+                    </div>
+
+
+                    <div>
+                        <input n:name=send class="mt-4 bg-slate-600 text-white py-4 px-10 cursor-pointer">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </section>

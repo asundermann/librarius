@@ -14,13 +14,17 @@ class BasePresenter extends Nette\Application\UI\Presenter
     /** @var Model\UsersRepository */
     public $users;
 
+    public $passwords;
+
     /** @var Model\ArticleRepository */
     public $articles;
 
-    public function __construct(Model\UsersRepository $users, Model\ArticleRepository $articles)
+    public function __construct(Model\UsersRepository $users, Model\ArticleRepository $articles, Nette\Security\Passwords $passwords)
     {
         $this->users = $users;
         $this->articles = $articles;
+        $this->passwords = $passwords;
+
     }
 
     public  function  beforeRender()
@@ -35,10 +39,21 @@ class BasePresenter extends Nette\Application\UI\Presenter
                 'title' => 'Přehled',
 
             ],
+            'About' => (object) [
+                'presenter' => 'About:default',
+                'icon' => 'fas fa-newspaper',
+                'title' => 'O projektu',
+
+            ],
             'Articles' => (object) [
                 'presenter' => 'Article:default',
                 'icon' => 'fas fa-folder-open',
                 'title' => 'Nahrát',
+            ],
+            'Users' => (object) [
+                'presenter' => 'Users:default',
+                'icon' => 'fas fa-user-circle',
+                'title' => 'Uživatelé',
             ]
         ];
 
