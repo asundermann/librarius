@@ -25,11 +25,11 @@
             n:class="$flash->type == 'success' ?'bg-green-400':'bg-rose-600','p-4 text-white w-full text-center'">{$flash->message}
 	</div>
 
-	<div class="bg-slate-200 flex justify-between items-center">
+	<div class="bg-[F8F6F4] flex justify-between items-center">
 
 		<div class="p-4 flex phone:flex-col sm:flex-row">
 			<div class="h-[80px]">
-				<img src="{$basePath}/dist/img/static/cms-logo.svg" class="w-full h-full fill-slate-600">
+				<img src="{$basePath}/dist/img/static/librarius-transparent-purple-book.svg" class="w-full h-full">
 			</div>
 		</div>
 
@@ -41,7 +41,14 @@
 				<p class="ml-2 text-sm">{$loggedUser->email}</p>
 			</div>
 
-			<a n:href="Login:out" class="hover:bg-white/60 hover:text-black p-4 transition-all phone:mt-4 sm:mt-0 mx-4 p-4 bg-slate-600 text-white">Odhlásit se</a>
+			<div class="my-10">
+				{include '../../../Components/ActionButton/ActionButton.latte',
+				"link" => "Login:out",
+				"text" => "Odhlásit se",
+				"class" => "mx-4"
+				}
+			</div>
+
 		</div>
 	</div>
 

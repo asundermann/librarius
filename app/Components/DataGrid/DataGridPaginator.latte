@@ -3,26 +3,26 @@
 
 <div n:if="$paginator->pageCount > 1" class="my-8">
 	{if $paginator->isFirst()}
-	<a class="transition-all phone:mt-4 sm:mt-0  p-2 bg-slate-600 text-white opacity-75">
+	<a class="transition-all phone:mt-4 sm:mt-0  p-2 bg-librarius-900 text-white opacity-75">
 	{else}
-		<a class="hover:bg-white/60 hover:text-black transition-all phone:mt-4 sm:mt-0  p-2 bg-slate-600 text-white ajax" href="{$link('page!', ['page' => $paginator->page - 1])}" rel="prev">
+		<a class="hover:bg-white/60 hover:text-black transition-all phone:mt-4 sm:mt-0  p-2 bg-librarius-900 text-white ajax" href="{$link('page!', ['page' => $paginator->page - 1])}" rel="prev">
 	{/if}
 	<i n:block = "icon-arrow-left" class="{$iconPrefix}arrow-left"></i> {='ublaboo_datagrid.previous'|translate}</a>
 
 		{foreach $steps as $step}
 			{if $step == $paginator->page}
-				<a class="transition-all phone:mt-4 sm:mt-0  p-2 bg-slate-600 text-white opacity-75">{$step}</a>
+				<a class="transition-all phone:mt-4 sm:mt-0  p-2 bg-librarius-900 text-white opacity-75">{$step}</a>
 			{else}
-				<a class="hover:bg-white/60 hover:text-black transition-all phone:mt-4 sm:mt-0  p-2 bg-slate-600 text-white ajax" href="{$link('page!', ['page' => $step])}">{$step}</a>
+				<a class="hover:bg-white/60 hover:text-black transition-all phone:mt-4 sm:mt-0  p-2 bg-librarius-900 text-white ajax" href="{$link('page!', ['page' => $step])}">{$step}</a>
 			{/if}
 
 			{if $iterator->nextValue > $step + 1}<span>…</span>{/if}
 		{/foreach}
 
 		{if $paginator->isLast()}
-		<a class="first transition-all phone:mt-4 sm:mt-0  p-2 bg-slate-600 text-white opacity-75">{='ublaboo_datagrid.next'|translate}
+		<a class="first transition-all phone:mt-4 sm:mt-0  p-2 bg-librarius-900 text-white opacity-75">{='ublaboo_datagrid.next'|translate}
 		{else}
-			<a class="hover:bg-white/60 hover:text-black transition-all phone:mt-4 sm:mt-0  p-2 bg-slate-600 text-white ajax" href="{$link('page!', ['page' => $paginator->page + 1])}" rel="next">{='ublaboo_datagrid.next'|translate}
+			<a class="hover:bg-white/60 hover:text-black transition-all phone:mt-4 sm:mt-0  p-2 bg-librarius-900 text-white ajax" href="{$link('page!', ['page' => $paginator->page + 1])}" rel="next">{='ublaboo_datagrid.next'|translate}
 		{/if}
 				<i n:block = "icon-arrow-right" class="{$iconPrefix}arrow-right"></i></a>
 </div>

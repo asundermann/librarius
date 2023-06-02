@@ -31,12 +31,14 @@ class BasePresenter extends Nette\Application\UI\Presenter
         [
             'Overview' => (object) [
                 'presenter' => 'Dashboard:default',
+                'icon' => 'fas fa-archive',
                 'title' => 'Přehled',
 
             ],
             'Articles' => (object) [
                 'presenter' => 'Article:default',
-                'title' => 'Články',
+                'icon' => 'fas fa-folder-open',
+                'title' => 'Nahrát',
             ]
         ];
 

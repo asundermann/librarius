@@ -1,7 +1,10 @@
 {varType string $link}
 {varType string $text}
+{varType string $class}
+
+{default $class = null}
 
 <a n:href="{$link}"
-class="hover:bg-white/60 hover:text-black transition-all phone:mt-4 sm:mt-0  p-4 bg-slate-600 text-white">
+class="hover:bg-white/60 hover:text-black transition-all phone:mt-4 sm:mt-0  p-4 bg-librarius-900 text-white {$class} ">
     {$text}
 </a>

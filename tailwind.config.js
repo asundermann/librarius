@@ -12,6 +12,11 @@ module.exports = {
       },
       fontFamily: {
         'poppins': ["'Poppins'",'sans-serif']
+      },
+      colors: {
+        librarius: {
+          900: '#c0168a'
+        }
       }
     },
   },

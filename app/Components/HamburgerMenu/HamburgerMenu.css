@@ -71,7 +71,7 @@
     visibility: visible;
     opacity: 1;
     padding-top:100px;
-    background:rgb(226 232 240 / var(--tw-bg-opacity));
+    background: white;
 }
 
 #menu li{

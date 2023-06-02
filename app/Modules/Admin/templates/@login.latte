@@ -19,7 +19,10 @@
     <section class="flex flex-col absolute w-full h-full">
             <div class="flex justify-center relative phone:top-[10%] md:top-[30%]">
             <div class="p-12 w-[500px] bg-slate-200 text-center">
-                <h2 class="text-2xl pb-6">Přihlášení</h2>
+
+                <div class="h-[80px] mb-4">
+                    <img src="{$basePath}/dist/img/static/librarius-transparent-purple-book.svg" class="w-full h-full">
+                </div>
 
                 <form n:name="loginForm">
 
@@ -35,14 +38,9 @@
                         </label>
                     </div>
 
-{*                    <div class="mt-6">*}
-{*                        <label n:name=keepLoggedIn>Zůstat přihlášen <br>*}
-{*                            <input n:name=keepLoggedIn class="mt-2 p-2">*}
-{*                        </label>*}
-{*                    </div>*}
 
                     <div class="mt-6">
-                        <input n:name=send class="mt-4 bg-slate-600 text-white py-4 px-10 cursor-pointer">
+                        <input n:name=send class="mt-4 bg-librarius-900 text-white py-4 px-10 cursor-pointer">
                     </div>
 
                 </form>

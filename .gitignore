@@ -4,3 +4,4 @@ config/database.neon
 /node_modules/
 /www/dist/css/output.css
 /vendor/
+.idea
