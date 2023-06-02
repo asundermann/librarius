@@ -1,7 +1,8 @@
 {block pageContent}
-<section class="h-full w-full">
+<section class="h-[100vh] w-full">
     <div class="p-6">
         <h1 class="text-2xl mb-2">Uživatelé</h1><hr>
+        <div class="mt-6 phone:block md:hidden">Pokud nevidíte tabulku, je třeba větší rozlišení. Zkuste překlopit mobil do širokého rozlišení.</div>
     </div>
 
 
@@ -14,7 +15,7 @@
             }
         </div>
 
-        <div class="h-full w-full">
+        <div class="phone:hidden md:flex lg:block my-10 h-full w-full">
             {control grid}
         </div>
 

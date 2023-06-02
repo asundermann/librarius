@@ -1,10 +1,19 @@
 {varType string $link}
 {varType string $text}
 {varType string $class}
+{varType int $variation}
 
 {default $class = null}
+{default $variation = "dynamic"}
 
-<a n:href="{$link}"
-class="hover:bg-white/60 hover:text-black transition-all phone:mt-4 sm:mt-0  p-4 bg-librarius-900 text-white {$class} ">
-    {$text}
-</a>
+{if $variation === "dynamic"}
+    <a n:href="{$link}"
+    class="hover:bg-white/60 hover:text-black transition-all phone:mt-4 sm:mt-0  p-4 bg-librarius-900 text-white {$class}">
+        {$text}
+    </a>
+{else}
+    <a href="{$link}"
+    class="hover:bg-white/60 hover:text-black transition-all phone:mt-4 sm:mt-0  p-4 bg-librarius-900 text-white {$class}">
+        {$text}
+    </a>
+{/if}

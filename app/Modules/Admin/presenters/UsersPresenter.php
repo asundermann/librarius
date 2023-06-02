@@ -86,7 +86,6 @@ final class UsersPresenter extends BasePresenter
                 ->insertUser($data);
             $this->flashMessage('Uživatel byl přidán', 'success');
             $this->redirect('Users:default');
-//            $this->redirect('Article:edit',$post->id);
 
         }
 

@@ -11,10 +11,10 @@ use Nette;
 class BasePresenter extends Nette\Application\UI\Presenter
 {
 
-    /** @var Model\UsersRepository */
-    public $users;
 
     public $passwords;
+    /** @var Model\UsersRepository */
+    public $users;
 
     /** @var Model\ArticleRepository */
     public $articles;
@@ -57,6 +57,8 @@ class BasePresenter extends Nette\Application\UI\Presenter
             ]
         ];
 
+        $year = new \DateTime('today');
+        $this->template->year = $year->format('Y');
     }
 
     public function startup()
