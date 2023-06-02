@@ -8,6 +8,9 @@
     margin-bottom: 1rem;
     border: 1px solid #61646c;
 }
+.datagrid {
+    padding: 0 !important;
+}
 
 .col-action.col-action {
     text-align: right;
