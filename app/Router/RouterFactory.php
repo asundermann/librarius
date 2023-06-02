@@ -18,10 +18,12 @@ final class RouterFactory
 
 //        ADMIN MODULE
         $router->withModule('Admin')
-               ->addRoute('admin/<presenter>/<action>[/<id>]', 'Login:default');
+               ->addRoute('<presenter>/<action>[/<id>]', 'Login:default');
 
-//        FRONT MODULE
-		$router->addRoute('<presenter>/<action>[/<id>]', 'Main:default');
+///     I dont need it for now
+///         FRONT MODULE
+//        $router->withModule('Front')
+//		        ->addRoute('<presenter>/<action>[/<id>]', 'Main:default');
 
 		return $router;
 	}
