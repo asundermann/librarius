@@ -64,5 +64,26 @@ class UsersRepository
         $row->delete();
     }
 
+    public function userEmailExists(string $email)
+    {
+        $row = $this->findAll()
+            ->where(self::PRIMARY_TABLE_EMAIL, $email)
+            ->fetch();
+
+        return $row ? true : false;
+
+    }
+    public function userUsernameExists(string $username)
+    {
+        $row = $this->findAll()
+            ->where(self::PRIMARY_TABLE_USERNAME, $username)
+            ->fetch();
+
+        return $row ? true : false;
+
+    }
+
+
+
 
 }

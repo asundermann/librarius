@@ -33,6 +33,22 @@ final class UsersPresenter extends BasePresenter
     {
     }
 
+    public function actionEdit($id)
+    {
+        $user = $this->users
+            ->getUserById($id);
+
+        if (!$user) {
+            $this->error('Uživatel nenalezen!');
+        }
+
+        $articleArray = $user->toArray();
+        $defaults = array_replace($articleArray);
+
+        $this->getComponent('usersForm')
+            ->setDefaults($defaults);
+    }
+
     public function actionDelete($id){
         try {
             $this->users->deleteUser($id);
@@ -48,7 +64,7 @@ final class UsersPresenter extends BasePresenter
     {
         $presenter = $this->getAction();
         $caption = $presenter == 'add' ? 'Vytvořit' : 'Upravit';
-        $roles = ['admin' => 'Administrátor', 'user' =>'Uživatel'];
+        $roles = ['admin' => 'Administrátor', 'user' =>'Uživatel', 'librarius' => 'Librarius'];
 
         $form = new Form;
         $form->addText(UsersRepository::PRIMARY_TABLE_EMAIL,'E-mail')
@@ -70,26 +86,21 @@ final class UsersPresenter extends BasePresenter
 
     public function usersFormValidate($form,$data)
     {
-        $array = $this->users->findAll()->fetchAll();
-        $email = $data->email;
-        $username = $data->username;
-
-
-//            if ($email )
-//            {
-//                $this->flashMessage('Uživatel se stejným emailem už existuje', 'warning');
-//                $this->redirect('Users:add');
-//            }
-//            elseif($username)
-//            {
-//                $this->flashMessage('Uživatel se stejnou přezdívkou už existuje', 'warning');
-//                $this->redirect('Users:add');
-//            }
-//            else
-//            {
-//                $this->usersFormSucceeded($data);
-//            }
+        $emailExists = $this->users->userEmailExists($data->email);
+        $usernameExists = $this->users->userUsernameExists($data->username);
+        if ($emailExists)
+        {
+            $this->flashMessage('Uživatel se stejným emailem už existuje', 'warning');
+            $this->redirect('Users:add');
+        } elseif($usernameExists)
+        {
+            $this->flashMessage('Uživatel se stejnou přezdívkou už existuje', 'warning');
+            $this->redirect('Users:add');
+        } elseif (!$usernameExists && !$emailExists)
+        {
+            $this->usersFormSucceeded($data);
         }
+    }
 
     public function usersFormSucceeded($data)
     {
@@ -100,20 +111,19 @@ final class UsersPresenter extends BasePresenter
         [$data['password'] = $hashedPassword];
 
 
-//        if ($userId) {
-//            $this->users
-//                ->updateUser($userId,$data);
-//            $this->flashMessage('Uživatel byl upraven', 'success');
-//
-//        } else
-//        {
-            $post = $this->users
+        if ($userId) {
+            $this->users
+                ->updateUser($userId,$data);
+            $this->flashMessage('Uživatel byl upraven', 'success');
+
+        } else
+        {
+            $this->users
                 ->insertUser($data);
             $this->flashMessage('Uživatel byl přidán', 'success');
             $this->redirect('Users:default');
 
-//        }
-
+        }
     }
 
 
@@ -157,6 +167,11 @@ final class UsersPresenter extends BasePresenter
             ->setFilterText();
         $grid->addColumnText('role', 'Role')
             ->setSortable();
+
+        $grid->addAction('edit','')
+            ->setIcon('pen')
+            ->setTitle('Editovat');
+
         $grid->addAction('delete', '')
             ->setIcon('trash')
             ->setTitle('Smazat')
