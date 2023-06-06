@@ -62,12 +62,36 @@ final class UsersPresenter extends BasePresenter
 
         $form->addSubmit('send',$caption)
             ->setHtmlAttribute('id','send');
-        $form->onSuccess[] = [$this,'usersFormSucceeded'];
+        $form->onSuccess[] = [$this,'usersFormValidate'];
 
         return $form;
     }
 
-    public function usersFormSucceeded($form, $data)
+
+    public function usersFormValidate($form,$data)
+    {
+        $array = $this->users->findAll()->fetchAll();
+        $email = $data->email;
+        $username = $data->username;
+
+
+//            if ($email )
+//            {
+//                $this->flashMessage('Uživatel se stejným emailem už existuje', 'warning');
+//                $this->redirect('Users:add');
+//            }
+//            elseif($username)
+//            {
+//                $this->flashMessage('Uživatel se stejnou přezdívkou už existuje', 'warning');
+//                $this->redirect('Users:add');
+//            }
+//            else
+//            {
+//                $this->usersFormSucceeded($data);
+//            }
+        }
+
+    public function usersFormSucceeded($data)
     {
         $userId = $this->getParameter('id');
 
@@ -76,18 +100,19 @@ final class UsersPresenter extends BasePresenter
         [$data['password'] = $hashedPassword];
 
 
-        if ($userId) {
-            $this->users
-                ->updateUser($userId,$data);
-            $this->flashMessage('Uživatel byl upraven', 'success');
-
-        } else {
+//        if ($userId) {
+//            $this->users
+//                ->updateUser($userId,$data);
+//            $this->flashMessage('Uživatel byl upraven', 'success');
+//
+//        } else
+//        {
             $post = $this->users
                 ->insertUser($data);
             $this->flashMessage('Uživatel byl přidán', 'success');
             $this->redirect('Users:default');
 
-        }
+//        }
 
     }
 
