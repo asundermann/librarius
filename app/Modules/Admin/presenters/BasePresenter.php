@@ -15,13 +15,15 @@ class BasePresenter extends Nette\Application\UI\Presenter
     public $passwords;
     /** @var Model\UsersRepository */
     public $users;
-
+    /** @var Model\BooksRepository */
+    public $booksRepository;
     /** @var Model\ArticleRepository */
     public $articles;
 
-    public function __construct(Model\UsersRepository $users, Model\ArticleRepository $articles, Nette\Security\Passwords $passwords)
+    public function __construct(Model\UsersRepository $users, Model\ArticleRepository $articles, Nette\Security\Passwords $passwords, Model\BooksRepository $booksRepository)
     {
         $this->users = $users;
+        $this->booksRepository = $booksRepository;
         $this->articles = $articles;
         $this->passwords = $passwords;
 
@@ -45,10 +47,15 @@ class BasePresenter extends Nette\Application\UI\Presenter
                 'title' => 'O projektu',
 
             ],
+            'Books' => (object) [
+                'presenter' => 'Books:default',
+                'icon' => 'fas fa-book-open',
+                'title' => 'Knihy',
+            ],
             'Articles' => (object) [
                 'presenter' => 'Article:default',
                 'icon' => 'fas fa-folder-open',
-                'title' => 'Nahrát',
+                'title' => 'Články',
             ],
             'Users' => (object) [
                 'presenter' => 'Users:default',

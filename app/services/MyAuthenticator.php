@@ -1,7 +1,9 @@
 <?php
 
-use Nette,
-    Nette\Security\SimpleIdentity;
+namespace App\services;
+
+use Nette;
+use Nette\Security\SimpleIdentity;
 
 
 class MyAuthenticator implements Nette\Security\Authenticator
@@ -9,7 +11,8 @@ class MyAuthenticator implements Nette\Security\Authenticator
     private $database;
     private $passwords;
 
-    public function __construct(Nette\Database\Explorer $database, Nette\Security\Passwords $passwords) {
+    public function __construct(Nette\Database\Explorer $database, Nette\Security\Passwords $passwords)
+    {
         $this->database = $database;
         $this->passwords = $passwords;
     }

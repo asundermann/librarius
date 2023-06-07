@@ -2,7 +2,19 @@
 
 declare(strict_types=1);
 
+// absolute filesystem path to the web root
+
+define('WWW_DIR', __DIR__);
+
+// absolute filesystem path to the temporary files
+define('TEMP_DIR', WWW_DIR . '/../temp');
+
+//uploaded files
+define('UPLOAD_DIR', WWW_DIR . '/uploads');
+
 require __DIR__ . '/../vendor/autoload.php';
+
+
 
 
 $configurator = App\Bootstrap::boot();
