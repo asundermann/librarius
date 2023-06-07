@@ -1,5 +1,9 @@
 parameters:
 
+includes:
+    - database.neon
+    - services.neon
+
 application:
 	errorPresenter: Error
 	mapping:
