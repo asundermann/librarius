@@ -88,17 +88,25 @@ final class UsersPresenter extends BasePresenter
     {
         $emailExists = $this->users->userEmailExists($data->email);
         $usernameExists = $this->users->userUsernameExists($data->username);
-        if ($emailExists)
-        {
-            $this->flashMessage('Uživatel se stejným emailem už existuje', 'warning');
-            $this->redirect('Users:add');
-        } elseif($usernameExists)
-        {
-            $this->flashMessage('Uživatel se stejnou přezdívkou už existuje', 'warning');
-            $this->redirect('Users:add');
-        } elseif (!$usernameExists && !$emailExists)
-        {
+
+        $userId = $this->getParameter('id');
+
+        if ($userId){
             $this->usersFormSucceeded($data);
+        }else
+        {
+            if ($emailExists)
+            {
+                $this->flashMessage('Uživatel se stejným emailem už existuje', 'warning');
+                $this->redirect('Users:add');
+            } elseif($usernameExists)
+            {
+                $this->flashMessage('Uživatel se stejnou přezdívkou už existuje', 'warning');
+                $this->redirect('Users:add');
+            } elseif (!$usernameExists && !$emailExists)
+            {
+                $this->usersFormSucceeded($data);
+            }
         }
     }
 
