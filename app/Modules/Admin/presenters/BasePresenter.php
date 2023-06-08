@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace App\Modules\Admin\presenters;
 
-use App\Model;
-use Nette;
+use App\Model,
+    App\services\ImageService,
+    Nette;
 
 
 class BasePresenter extends Nette\Application\UI\Presenter
@@ -19,13 +20,24 @@ class BasePresenter extends Nette\Application\UI\Presenter
     public $booksRepository;
     /** @var Model\ArticleRepository */
     public $articles;
+    /** @var ImageService */
+    public $imageService;
 
-    public function __construct(Model\UsersRepository $users, Model\ArticleRepository $articles, Nette\Security\Passwords $passwords, Model\BooksRepository $booksRepository)
+
+    public function __construct
+    (
+        Model\UsersRepository $users,
+        Model\ArticleRepository $articles,
+        Nette\Security\Passwords $passwords,
+        Model\BooksRepository $booksRepository,
+        ImageService $imageService
+    )
     {
         $this->users = $users;
         $this->booksRepository = $booksRepository;
         $this->articles = $articles;
         $this->passwords = $passwords;
+        $this->imageService = $imageService;
 
     }
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3b5cd43d3e43804aa84aa768288c2dd6",
+    "content-hash": "d2e099dbcfb8168d6b22a19c817e0c2e",
     "packages": [
         {
             "name": "contributte/application",
@@ -83,30 +83,104 @@
             "time": "2021-03-10T21:48:30+00:00"
         },
         {
-            "name": "latte/latte",
-            "version": "v3.0.6",
+            "name": "contributte/image-storage",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/nette/latte.git",
-                "reference": "6f66dcfea7ad76f60b8234139161421e9e1e309f"
+                "url": "https://github.com/contributte/image-storage.git",
+                "reference": "109c7cb24cf6645d7a1040ccab3eba0e19e9e69a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/latte/zipball/6f66dcfea7ad76f60b8234139161421e9e1e309f",
-                "reference": "6f66dcfea7ad76f60b8234139161421e9e1e309f",
+                "url": "https://api.github.com/repos/contributte/image-storage/zipball/109c7cb24cf6645d7a1040ccab3eba0e19e9e69a",
+                "reference": "109c7cb24cf6645d7a1040ccab3eba0e19e9e69a",
+                "shasum": ""
+            },
+            "require": {
+                "latte/latte": "^2.5",
+                "nette/application": "^3.0",
+                "nette/di": "^3.0",
+                "nette/http": "^3.0",
+                "nette/utils": "^3.0",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "ninjify/nunjuck": "^0.4.0",
+                "ninjify/qa": "^0.12",
+                "phpstan/phpstan": "^0.12.33",
+                "phpstan/phpstan-nette": "^0.12.8",
+                "tracy/tracy": "^2.6"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.2.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Contributte\\ImageStorage\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pavel Janda",
+                    "homepage": "https://paveljanda.com"
+                }
+            ],
+            "description": "Image storage for Nette framework",
+            "keywords": [
+                "crop",
+                "image",
+                "nette",
+                "resize",
+                "storage",
+                "upload"
+            ],
+            "support": {
+                "issues": "https://github.com/contributte/image-storage/issues",
+                "source": "https://github.com/contributte/image-storage/tree/v2.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://contributte.org/partners.html",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/f3l1x",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-05-06T21:42:08+00:00"
+        },
+        {
+            "name": "latte/latte",
+            "version": "v2.11.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nette/latte.git",
+                "reference": "af4dbb23a6044b1cf4904830a9b00246318c93d4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nette/latte/zipball/af4dbb23a6044b1cf4904830a9b00246318c93d4",
+                "reference": "af4dbb23a6044b1cf4904830a9b00246318c93d4",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "ext-tokenizer": "*",
-                "php": ">=8.0 <8.3"
+                "php": ">=7.1 <8.3"
             },
             "conflict": {
-                "nette/application": "<3.1.7",
-                "nette/caching": "<3.1.4"
+                "nette/application": "<2.4.1"
             },
             "require-dev": {
-                "nette/php-generator": "^3.6 || ^4.0",
+                "nette/php-generator": "^3.3.4",
                 "nette/tester": "^2.0",
                 "nette/utils": "^3.0",
                 "phpstan/phpstan": "^1",
@@ -125,7 +199,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-master": "2.11-dev"
                 }
             },
             "autoload": {
@@ -163,9 +237,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/latte/issues",
-                "source": "https://github.com/nette/latte/tree/v3.0.6"
+                "source": "https://github.com/nette/latte/tree/v2.11.6"
             },
-            "time": "2023-03-09T01:34:56+00:00"
+            "time": "2022-11-04T14:53:52+00:00"
         },
         {
             "name": "nette/application",

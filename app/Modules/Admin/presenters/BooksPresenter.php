@@ -8,10 +8,8 @@ use Nette\Application\UI\Form,
     Ublaboo\DataGrid\DataGrid,
     Ublaboo\DataGrid\Column\Action\Confirmation\StringConfirmation,
     Ublaboo\DataGrid\Localization\SimpleTranslator,
-    App\Model\BooksRepository,
-    Nette\Utils\FileSystem,
-    Nette\Utils\Image,
-    Nette\Http\FileUpload;
+    App\Model\BooksRepository;
+
 use function Symfony\Component\String\b;
 
 final class BooksPresenter extends BasePresenter
@@ -38,22 +36,23 @@ final class BooksPresenter extends BasePresenter
     {
     }
 
-//    public function actionEdit($id)
-//    {
-//        $article = $this->articles
-//            ->getArticleById($id);
-//
-//        if (!$article) {
-//            $this->error('Článek nenalezen!');
-//        }
-//
-//        $date = date_format($article->date_publish,'Y-m-d');
-//        $articleArray = $article->toArray();
-//        $defaults = array_replace($articleArray,['date_publish'=> $date]);
-//
-//        $this->getComponent('articleForm')
-//            ->setDefaults($defaults);
-//    }
+
+
+    public function actionEdit($id)
+    {
+        $book = $this->booksRepository
+            ->getBookById($id);
+
+        if (!$book) {
+            $this->error('Článek nenalezen!');
+        }
+
+        $bookArray = $book->toArray();
+        $this->template->bookArray = $bookArray;
+
+        $this->getComponent('booksForm')
+            ->setDefaults($bookArray);
+    }
 //
 //    public function actionDelete($id){
 //        try {
@@ -130,7 +129,7 @@ final class BooksPresenter extends BasePresenter
         $form->addUpload(BooksRepository::PRIMARY_TABLE_IMAGE)
             ->addRule($form::Image, 'Obrázek musí být v JPEG, PNG, GIF, WebP or AVIF.')
             ->setRequired();
-        $form->addUpload(BooksRepository::PRIMARY_TABLE_FILE);
+//        $form->addUpload(BooksRepository::PRIMARY_TABLE_FILE);
 
         $form->addSubmit('send',$caption)
             ->setHtmlAttribute('id','send');
@@ -141,51 +140,32 @@ final class BooksPresenter extends BasePresenter
 
     public function booksFormSucceeded($form, $data)
     {
-        bdump('Success');
 
         $image = $data->image;
-        $this->uploadImage($image,self::IMAGE_DIR);
 
-
-//        if(!$dir){
-//            FileSystem::createDir($dir);
-//        }else
-//        {
-//
-//        }
-
-        //
-//        $articleId = $this->getParameter('id');
-//
-//        if ($articleId) {
-//            $this->articles
-//                ->updateArticle($articleId,$data);
-//            $this->flashMessage('Článek byl upraven', 'success');
-//
-//        } else {
-//            $post = $this->articles
-//                ->insertArticle($data);
-//            $this->flashMessage('Článek byl přidán', 'success');
-//            $this->redirect('Article:edit',$post->id);
-//
-//        }
-
-    }
-
-    private function getRandomName(string $fileName): string
-    {
-        $ext = explode('.', $fileName);
-        $ext = '.' . $ext[count($ext) - 1];
-        return md5(time() . rand()) . $ext;
-    }
-
-    public function uploadImage($image,$directory)
-    {
         $sanitName = $image->getSanitizedName();
-        $randName = $this->getRandomName($sanitName);
+        $randName = $this->imageService->getRandomName($sanitName);
+        $bookId = $this->getParameter('id');
+        $imagePath = $image->getTemporaryFile();
+        $imagePath = $randName;
 
-        $image->move($directory.'/'.$randName);
+        $data->image = $imagePath;
+        if ($bookId) {
+            $this->booksRepository
+                ->updateBook($bookId,$data);
+            $this->flashMessage('Článek byl upraven', 'success');
+
+        } else {
+            $post = $this->booksRepository
+                ->insertBook($data);
+            $this->imageService->uploadImage($image,self::IMAGE_DIR,$randName);
+            $this->flashMessage('Článek byl přidán', 'success');
+            $this->redirect('Books:edit',$post->id);
+        }
+
     }
+
+
 
 
 }

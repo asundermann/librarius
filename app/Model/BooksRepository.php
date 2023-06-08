@@ -29,28 +29,30 @@ class BooksRepository
     {
         return $this->database->table(self::PRIMARY_TABLE);
     }
-//
-//    public function findArticleById(int $id): Selection
-//    {
-//        return $this->database
-//            ->table(self::PRIMARY_TABLE)
-//            ->where('id', $id);
-//    }
-//
-//    public function insertArticle($data)
-//    {
-//        return $this->findAll()->insert($data);
-//    }
-//
-//    public function updateArticle($articleId,$data)
-//    {
-//        return $this->getArticleById($articleId)->update($data);
-//    }
-//
-//    public function getArticleById($id): ActiveRow
-//    {
-//        return $this->findAll()->get($id);
-//    }
+
+    public function findBookById(int $id): Selection
+    {
+        return $this->database
+            ->table(self::PRIMARY_TABLE)
+            ->where('id', $id);
+    }
+
+    public function getBookById($id): ActiveRow
+    {
+        return $this->findAll()->get($id);
+    }
+
+    public function insertBook($data)
+    {
+        return $this->findAll()->insert($data);
+    }
+
+    public function updateBook($bookId,$data)
+    {
+        return $this->getBookById($bookId)->update($data);
+    }
+
+
 //
 //    public function deleteArticle($id)
 //    {

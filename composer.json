@@ -24,8 +24,9 @@
 		"nette/schema": "^1.2",
 		"nette/utils": "^3.2",
 		"tracy/tracy": "^2.9",
-		"latte/latte": "^3.0.3",
-		"ublaboo/datagrid": "^6.9.5"
+		"latte/latte": "^2.5",
+		"ublaboo/datagrid": "^6.9.5",
+		"contributte/image-storage": "^2.1"
 	},
 	"require-dev": {
 		"nette/tester": "^2.3",
