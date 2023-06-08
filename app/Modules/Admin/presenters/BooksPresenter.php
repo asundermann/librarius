@@ -4,16 +4,21 @@ declare(strict_types=1);
 
 namespace App\Modules\Admin\presenters;
 
-use App\Model\ArticleRepository,
-    Nette\Application\UI\Form,
+use Nette\Application\UI\Form,
     Ublaboo\DataGrid\DataGrid,
     Ublaboo\DataGrid\Column\Action\Confirmation\StringConfirmation,
-    Ublaboo\DataGrid\Localization\SimpleTranslator;
-use App\Model\BooksRepository;
-use Nette\Utils\FileSystem;
+    Ublaboo\DataGrid\Localization\SimpleTranslator,
+    App\Model\BooksRepository,
+    Nette\Utils\FileSystem,
+    Nette\Utils\Image,
+    Nette\Http\FileUpload;
+use function Symfony\Component\String\b;
 
 final class BooksPresenter extends BasePresenter
 {
+    public const FILE_DIR = UPLOAD_DIR.'/book-files';
+    public const IMAGE_DIR = UPLOAD_DIR.'/book-covers';
+
     public function startup()
     {
         parent::startup();
@@ -137,11 +142,17 @@ final class BooksPresenter extends BasePresenter
     public function booksFormSucceeded($form, $data)
     {
         bdump('Success');
-        $dir = UPLOAD_DIR.'/book-covers';
-        bdump($data);
 
-        FileSystem::createDir($dir);
+        $image = $data->image;
+        $this->uploadImage($image,self::IMAGE_DIR);
 
+
+//        if(!$dir){
+//            FileSystem::createDir($dir);
+//        }else
+//        {
+//
+//        }
 
         //
 //        $articleId = $this->getParameter('id');
@@ -160,5 +171,21 @@ final class BooksPresenter extends BasePresenter
 //        }
 
     }
+
+    private function getRandomName(string $fileName): string
+    {
+        $ext = explode('.', $fileName);
+        $ext = '.' . $ext[count($ext) - 1];
+        return md5(time() . rand()) . $ext;
+    }
+
+    public function uploadImage($image,$directory)
+    {
+        $sanitName = $image->getSanitizedName();
+        $randName = $this->getRandomName($sanitName);
+
+        $image->move($directory.'/'.$randName);
+    }
+
 
 }
