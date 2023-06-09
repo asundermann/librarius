@@ -1,5 +1,6 @@
-{block title}Přehled{/block}
+{block title}Přehled knih{/block}
 {block pageContent}
+
     <section class="h-full w-full">
         <div class="p-6">
             <h1 class="text-2xl mb-2">Přehled</h1><hr>
@@ -12,14 +13,13 @@
             *}
 
             {foreach $books as $book}
-
                 <a href="#" class="m-4 p-4 flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow  md:max-w-xl hover:bg-gray-100 hover:scale-105">
 
                     <img class="object-contain w-full rounded-t-lg h-96 md:object-cover md:h-auto md:w-48 md:rounded-none md:rounded-l-lg mb-6"
                          src="{$basePath}/uploads/book-covers/{$book->image}"
                          alt=""
                     >
-                    <div class="text-center flex flex-col md:h-auto md:w-48 md:rounded-none md:rounded-l-lg leading-normal">
+                    <div class="text-center flex flex-col w-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg leading-normal">
                         <p class="mb-2  text-sm font-normal text-gray-700">
                             {$book->author}
                         </p>

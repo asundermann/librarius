@@ -26,12 +26,13 @@
 	</div>
 
 
-	{include '../../../Components/MainMenu/MainMenu.latte' }
+	{include COMPONENTS_DIR.'/MainMenu/MainMenu.latte' }
 
-		<div class="flex h-full">
-			{include '../../../Components/SideMenuBar/SideMenuBar.latte' }
-			{include pageContent}
-		</div>
+
+	<div class="flex h-full">
+		{include  COMPONENTS_DIR.'/SideMenuBar/SideMenuBar.latte' }
+		{include pageContent}
+	</div>
 
 
 	{include '../../../Components/Footer/Footer.latte' }
