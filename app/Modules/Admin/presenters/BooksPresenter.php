@@ -150,10 +150,17 @@ final class BooksPresenter extends BasePresenter
         $imagePath = $randName;
 
         $data->image = $imagePath;
+
         if ($bookId) {
+            $book = $this->booksRepository
+                ->findBookById($bookId)
+                ->fetch();
+            $this->imageService->deleteImage(self::IMAGE_DIR,$book->image);
+            $this->imageService->uploadImage($image,self::IMAGE_DIR,$randName);
             $this->booksRepository
                 ->updateBook($bookId,$data);
             $this->flashMessage('Článek byl upraven', 'success');
+            $this->redirect('Books:edit',$book->id);
 
         } else {
             $post = $this->booksRepository

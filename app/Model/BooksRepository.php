@@ -30,7 +30,7 @@ class BooksRepository
         return $this->database->table(self::PRIMARY_TABLE);
     }
 
-    public function findBookById(int $id): Selection
+    public function findBookById($id): Selection
     {
         return $this->database
             ->table(self::PRIMARY_TABLE)

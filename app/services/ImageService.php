@@ -20,4 +20,10 @@ class ImageService
     {
         $image->move($directory.'/'.$randName);
     }
+
+    public function deleteImage($directory,$randName)
+    {
+        FileSystem::delete($directory.'/'.$randName);
+    }
+
 }
