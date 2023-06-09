@@ -36,8 +36,6 @@ final class BooksPresenter extends BasePresenter
     {
     }
 
-
-
     public function actionEdit($id)
     {
         $book = $this->booksRepository
@@ -53,16 +51,20 @@ final class BooksPresenter extends BasePresenter
         $this->getComponent('booksForm')
             ->setDefaults($bookArray);
     }
-//
-//    public function actionDelete($id){
-//        try {
-//            $this->articles->deleteArticle($id);
-//            $this->flashMessage('Článek byl úspěšně smazán','success');
-//        } catch (Exception $e) {
-//            $this->flashMessage($e->getMessage(), 'warning');
-//        }
-//        $this->redirect('default');
-//    }
+
+    public function actionDelete($id){
+        try {
+            $book = $this->booksRepository
+                ->findBookById($id)
+                ->fetch();
+            $this->imageService->deleteImage(self::IMAGE_DIR,$book->image);
+            $this->booksRepository->deleteBook($id);
+            $this->flashMessage('Článek byl úspěšně smazán','success');
+        } catch (Exception $e) {
+            $this->flashMessage($e->getMessage(), 'warning');
+        }
+        $this->redirect('default');
+    }
 
     public function createComponentGrid($name): DataGrid
     {
@@ -141,31 +143,33 @@ final class BooksPresenter extends BasePresenter
     public function booksFormSucceeded($form, $data)
     {
 
-        $image = $data->image;
-
-        $sanitName = $image->getSanitizedName();
-        $randName = $this->imageService->getRandomName($sanitName);
+        $tmpImage = $data->image;
         $bookId = $this->getParameter('id');
-        $imagePath = $image->getTemporaryFile();
-        $imagePath = $randName;
 
-        $data->image = $imagePath;
+        $sanitName = $tmpImage->getSanitizedName();
+        $randName = $this->imageService->getRandomName($sanitName);
+
+        $tmpImagePath = $tmpImage->getTemporaryFile();
+        $tmpImagePath = $randName;
+
+        $data->image = $tmpImagePath;
 
         if ($bookId) {
             $book = $this->booksRepository
                 ->findBookById($bookId)
                 ->fetch();
-            $this->imageService->deleteImage(self::IMAGE_DIR,$book->image);
-            $this->imageService->uploadImage($image,self::IMAGE_DIR,$randName);
+            $this->imageService
+                 ->updateImage($tmpImage,self::IMAGE_DIR,$book->image,$randName);
             $this->booksRepository
-                ->updateBook($bookId,$data);
+                 ->updateBook($bookId,$data);
             $this->flashMessage('Článek byl upraven', 'success');
             $this->redirect('Books:edit',$book->id);
 
         } else {
             $post = $this->booksRepository
                 ->insertBook($data);
-            $this->imageService->uploadImage($image,self::IMAGE_DIR,$randName);
+            $this->imageService
+                 ->uploadImage($tmpImage,self::IMAGE_DIR,$randName);
             $this->flashMessage('Článek byl přidán', 'success');
             $this->redirect('Books:edit',$post->id);
         }

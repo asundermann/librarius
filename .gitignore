@@ -5,3 +5,4 @@ config/database.neon
 /www/dist/css/output.css
 /vendor/
 .idea
+/www/uploads/

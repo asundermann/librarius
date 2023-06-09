@@ -16,14 +16,20 @@ class ImageService
         return md5(time() . rand()) . $ext;
     }
 
-    public function uploadImage($image,$directory,$randName)
+    public function uploadImage($tmpImage,$directory,$randName)
     {
-        $image->move($directory.'/'.$randName);
+        $tmpImage->move($directory.'/'.$randName);
     }
 
     public function deleteImage($directory,$randName)
     {
         FileSystem::delete($directory.'/'.$randName);
+    }
+
+    public function updateImage($tmpImage,$directory,$deletionImageName,$randName)
+    {
+        $this->deleteImage($directory,$deletionImageName);
+        $this->uploadImage($tmpImage,$directory,$randName);
     }
 
 }

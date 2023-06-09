@@ -52,17 +52,15 @@ class BooksRepository
         return $this->getBookById($bookId)->update($data);
     }
 
+    public function deleteBook($id)
+    {
+        $row = $this->findBookById($id);
 
-//
-//    public function deleteArticle($id)
-//    {
-//        $row = $this->findArticleById($id);
-//
-//        $article = $row->fetch();
-//        if (!$article) {
-//            throw new Exception('Record does not exist');
-//        }
-//        $row->delete();
-//    }
+        $book = $row->fetch();
+        if (!$book) {
+            throw new Exception('Record does not exist');
+        }
+        $row->delete();
+    }
 
 }
