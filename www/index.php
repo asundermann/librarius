@@ -12,6 +12,9 @@ define('TEMP_DIR', WWW_DIR . '/../temp');
 //uploaded files
 define('UPLOAD_DIR', WWW_DIR . '/uploads');
 
+//components directory
+define ('COMPONENTS_DIR',__DIR__.'/../app/Components');
+
 require __DIR__ . '/../vendor/autoload.php';
 
 
