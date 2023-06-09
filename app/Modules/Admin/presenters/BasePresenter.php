@@ -48,7 +48,7 @@ class BasePresenter extends Nette\Application\UI\Presenter
         $this->template->navItems =
         [
             'Overview' => (object) [
-                'presenter' => 'Dashboard:default',
+                'presenter' => 'BookOverview:default',
                 'icon' => 'fas fa-archive',
                 'title' => 'Přehled',
 

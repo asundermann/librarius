@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Modules\Admin\presenters;
 
 
-final class DashboardPresenter extends BasePresenter
+final class BookOverviewPresenter extends BasePresenter
 {
 
     public function startup()
@@ -19,7 +19,7 @@ final class DashboardPresenter extends BasePresenter
     }
     public function renderDefault()
     {
-        $this->template->books = $this->booksRepository->findAll()->fetchAll();
+        $this->template->books = $this->booksRepository->findAll()->order('RAND()')->fetchAll();
     }
 
 

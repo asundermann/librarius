@@ -28,7 +28,7 @@ final class LoginPresenter extends Nette\Application\UI\Presenter
 
         if ($this->getUser()->isLoggedIn())
         {
-            $this->redirect('Dashboard:default');
+            $this->redirect('BookOverview:default');
         }
     }
 
@@ -67,7 +67,7 @@ final class LoginPresenter extends Nette\Application\UI\Presenter
             $this->redirect('Login:default');
         }
 
-        $this->redirect('Dashboard:default');
+        $this->redirect('BookOverview:default');
     }
 
     public function actionOut()
