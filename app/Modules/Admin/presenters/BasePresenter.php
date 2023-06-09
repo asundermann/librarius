@@ -90,7 +90,6 @@ class BasePresenter extends Nette\Application\UI\Presenter
         if (!$this->getUser()->isLoggedIn())
         {
             $this->redirect('Login:default');
-            $this->terminate();
         }
 
     }

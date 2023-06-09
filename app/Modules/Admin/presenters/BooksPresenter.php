@@ -23,7 +23,6 @@ final class BooksPresenter extends BasePresenter
         if (!$this->getUser()->isLoggedIn())
         {
             $this->redirect('Login:default');
-            $this->terminate();
         }
 
     }
@@ -52,7 +51,8 @@ final class BooksPresenter extends BasePresenter
             ->setDefaults($bookArray);
     }
 
-    public function actionDelete($id){
+    public function actionDelete($id)
+    {
         try {
             $book = $this->booksRepository
                 ->findBookById($id)
@@ -175,8 +175,5 @@ final class BooksPresenter extends BasePresenter
         }
 
     }
-
-
-
 
 }

@@ -18,7 +18,6 @@ final class ArticlePresenter extends BasePresenter
         if (!$this->getUser()->isLoggedIn())
         {
             $this->redirect('Login:default');
-            $this->terminate();
         }
 
     }
@@ -48,7 +47,8 @@ final class ArticlePresenter extends BasePresenter
             ->setDefaults($defaults);
     }
 
-    public function actionDelete($id){
+    public function actionDelete($id)
+    {
         try {
             $this->articles->deleteArticle($id);
             $this->flashMessage('Článek byl úspěšně smazán','success');

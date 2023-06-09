@@ -14,12 +14,12 @@ final class DashboardPresenter extends BasePresenter
         if (!$this->getUser()->isLoggedIn())
         {
             $this->redirect('Login:default');
-            $this->terminate();
         }
 
     }
     public function renderDefault()
     {
+        $this->template->books = $this->booksRepository->findAll()->fetchAll();
     }
 
 

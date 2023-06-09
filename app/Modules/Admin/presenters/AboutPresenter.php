@@ -14,7 +14,6 @@ final class AboutPresenter extends BasePresenter
         if (!$this->getUser()->isLoggedIn())
         {
             $this->redirect('Login:default');
-            $this->terminate();
         }
 
     }
