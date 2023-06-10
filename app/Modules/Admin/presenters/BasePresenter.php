@@ -45,36 +45,82 @@ class BasePresenter extends Nette\Application\UI\Presenter
     {
         parent::beforeRender();
 
+        $loggedUserId = $this->getUser()->getId();
+        $loggedUser = $this->users->findAll()->where('id',$loggedUserId)->fetch();
+
+
+        if ($loggedUser->role == "user")
+        {
+            $this->template->navItems =
+                [
+                    'Overview' => (object) [
+                        'presenter' => 'BookOverview:default',
+                        'icon' => 'fas fa-archive',
+                        'title' => 'Přehled',
+
+                    ],
+                    'About' => (object) [
+                        'presenter' => 'About:default',
+                        'icon' => 'fas fa-newspaper',
+                        'title' => 'O projektu',
+
+                    ],
+                ];
+        } elseif($loggedUser->role == "admin")
+        {
         $this->template->navItems =
         [
-            'Overview' => (object) [
-                'presenter' => 'BookOverview:default',
-                'icon' => 'fas fa-archive',
-                'title' => 'Přehled',
+                    'Overview' => (object) [
+                        'presenter' => 'BookOverview:default',
+                        'icon' => 'fas fa-archive',
+                        'title' => 'Přehled',
 
-            ],
-            'About' => (object) [
-                'presenter' => 'About:default',
-                'icon' => 'fas fa-newspaper',
-                'title' => 'O projektu',
+                    ],
+                    'About' => (object) [
+                        'presenter' => 'About:default',
+                        'icon' => 'fas fa-newspaper',
+                        'title' => 'O projektu',
 
-            ],
-            'Books' => (object) [
-                'presenter' => 'Books:default',
-                'icon' => 'fas fa-book-open',
-                'title' => 'Knihy',
-            ],
-            'Articles' => (object) [
-                'presenter' => 'Article:default',
-                'icon' => 'fas fa-folder-open',
-                'title' => 'Články',
-            ],
-            'Users' => (object) [
-                'presenter' => 'Users:default',
-                'icon' => 'fas fa-user-circle',
-                'title' => 'Uživatelé',
-            ]
-        ];
+                    ],
+                    'Books' => (object) [
+                        'presenter' => 'Books:default',
+                        'icon' => 'fas fa-book-open',
+                        'title' => 'Knihy',
+                    ],
+                    'Articles' => (object) [
+                        'presenter' => 'Article:default',
+                        'icon' => 'fas fa-folder-open',
+                        'title' => 'Články',
+                    ],
+                    'Users' => (object) [
+                        'presenter' => 'Users:default',
+                        'icon' => 'fas fa-user-circle',
+                        'title' => 'Uživatelé',
+                    ]
+                ];
+        }elseif($loggedUser->role == "librarius")
+        {
+            $this->template->navItems =
+                    [
+                        'Overview' => (object) [
+                            'presenter' => 'BookOverview:default',
+                            'icon' => 'fas fa-archive',
+                            'title' => 'Přehled',
+
+                        ],
+                        'About' => (object) [
+                            'presenter' => 'About:default',
+                            'icon' => 'fas fa-newspaper',
+                            'title' => 'O projektu',
+
+                        ],
+                        'Books' => (object) [
+                            'presenter' => 'Books:default',
+                            'icon' => 'fas fa-book-open',
+                            'title' => 'Knihy',
+                        ],
+                    ];
+        }
 
         $year = new \DateTime('today');
         $this->template->year = $year->format('Y');
@@ -85,7 +131,8 @@ class BasePresenter extends Nette\Application\UI\Presenter
         parent::startup();
 
         $loggedUserId = $this->getUser()->getId();
-        $this->template->loggedUser = $this->users->findAll()->where('id',$loggedUserId)->fetch();
+        $loggedUser = $this->users->findAll()->where('id',$loggedUserId)->fetch();
+        $this->template->loggedUser = $loggedUser;
 
         if (!$this->getUser()->isLoggedIn())
         {
