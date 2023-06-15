@@ -17,15 +17,6 @@ final class BooksPresenter extends BasePresenter
     public const FILE_DIR = UPLOAD_DIR.'/book-files';
     public const IMAGE_DIR = UPLOAD_DIR.'/book-covers';
 
-    public function startup()
-    {
-        parent::startup();
-        if (!$this->getUser()->isLoggedIn())
-        {
-            $this->redirect('Login:default');
-        }
-
-    }
 
     public function renderDefault()
     {

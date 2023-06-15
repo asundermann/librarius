@@ -12,15 +12,6 @@ use App\Model\ArticleRepository,
 
 final class ArticlePresenter extends BasePresenter
 {
-    public function startup()
-    {
-        parent::startup();
-        if (!$this->getUser()->isLoggedIn())
-        {
-            $this->redirect('Login:default');
-        }
-
-    }
 
     public function renderDefault()
     {

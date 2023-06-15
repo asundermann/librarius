@@ -15,16 +15,7 @@ use Ublaboo\DataGrid\Localization\SimpleTranslator;
 final class UsersPresenter extends BasePresenter
 {
 
-    public function startup()
-    {
-        parent::startup();
-        if (!$this->getUser()->isLoggedIn())
-        {
-            $this->redirect('Login:default');
-            $this->terminate();
-        }
 
-    }
     public function renderDefault()
     {
     }

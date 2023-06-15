@@ -8,15 +8,6 @@ namespace App\Modules\Admin\presenters;
 final class BookOverviewPresenter extends BasePresenter
 {
 
-    public function startup()
-    {
-        parent::startup();
-        if (!$this->getUser()->isLoggedIn())
-        {
-            $this->redirect('Login:default');
-        }
-
-    }
     public function renderDefault()
     {
         $this->template->books = $this->booksRepository->findAll()->order('RAND()')->fetchAll();
