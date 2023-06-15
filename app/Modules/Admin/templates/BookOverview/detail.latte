@@ -1,0 +1,33 @@
+{block title}Detail knihy{/block}
+{block pageContent}
+
+    <section class="h-full w-full">
+        <div class="p-12 flex items-center justify-center flex-wrap h-full w-full gap-9">
+
+            <div class="flex w-full h-full lg:w-[340px]">
+                <img src="{$basePath}/uploads/book-covers/{$bookInfo->image}"
+                     class="w-50 h-50"
+                     alt="Kniha:{$bookInfo->title}">
+            </div>
+
+            <div class="w-full lg:w-1/2 h-full">
+                <div class="my-4">
+                    <h1 class="text-3xl mb-2 font-bold">{$bookInfo->title}</h1>
+                    <h2 class="text-sm mb-2">Autor: {$bookInfo->author}</h2>
+                </div>
+
+                <div class="my-6">
+                    <a href="#" class="text-black  border border-black py-2 px-4 rounded-full mr-2">Koupit originál</a>
+                    <a href="#" class="text-black  border border-black py-2 px-4 rounded-full">Recenze</a>
+                </div><hr>
+
+                <div class="my-6">{$bookInfo->content|noescape}</div><hr>
+
+                <div class="my-6">
+                    <a href="#" class="text-black  border border-black py-2 px-4 rounded-full mr-2">PDF</a>
+                    <a href="#" class="text-black  border border-black py-2 px-4 rounded-full">EPUB</a>
+                </div>
+            </div>
+        </div>
+
+    </section>

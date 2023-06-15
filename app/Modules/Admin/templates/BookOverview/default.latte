@@ -13,7 +13,7 @@
             *}
 
             {foreach $books as $book}
-                <a href="#" class="min-w-0 m-4 p-4 flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow  md:max-w-xl hover:bg-gray-100 hover:scale-105">
+                <a n:href=":detail, $book->id" class="min-w-0 m-4 p-4 flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow  md:max-w-xl hover:bg-gray-100 hover:scale-105">
 
                     <img class="object-contain w-full rounded-t-lg h-96 md:object-cover md:h-auto md:w-48 md:rounded-none md:rounded-l-lg mb-6"
                          src="{$basePath}/uploads/book-covers/{$book->image}"

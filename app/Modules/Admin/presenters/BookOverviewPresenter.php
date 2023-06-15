@@ -13,5 +13,16 @@ final class BookOverviewPresenter extends BasePresenter
         $this->template->books = $this->booksRepository->findAll()->order('RAND()')->fetchAll();
     }
 
+    public function renderDetail($id)
+    {
+        $book = $this->booksRepository
+            ->getBookById($id);
+
+        if (!$book) {
+            $this->error('Článek nenalezen!');
+        }
+
+        $this->template->bookInfo = $book;
+    }
 
 }
