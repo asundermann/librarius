@@ -1,4 +1,4 @@
-{block title}Detail knihy{/block}
+{block title}{$bookInfo->title} - {$bookInfo->author}{/block}
 {block pageContent}
 
     <section class="h-full w-full">
@@ -13,7 +13,7 @@
             <div class="w-full lg:w-1/2 h-full">
                 <div class="my-4">
                     <h1 class="text-3xl mb-2 font-bold">{$bookInfo->title}</h1>
-                    <h2 class="text-sm mb-2">Autor: {$bookInfo->author}</h2>
+                    <h2 class="text-sm mb-2">autor: {$bookInfo->author}</h2>
                 </div>
 
                 <div class="my-6">
