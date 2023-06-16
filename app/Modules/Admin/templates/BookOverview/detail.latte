@@ -24,8 +24,18 @@
                 <div class="my-6">{$bookInfo->content|noescape}</div><hr>
 
                 <div class="my-6">
-                    <a href="#" class="text-black  border border-black py-2 px-4 rounded-full mr-2">PDF</a>
-                    <a href="#" class="text-black  border border-black py-2 px-4 rounded-full">EPUB</a>
+                    <h1 class="text-xl mb-6 ">Ke stažení:</h1>
+
+                    <a href="#" class="text-white  bg-[#b30b00]  py-2 px-4 rounded-full mr-2">
+                        <i class="fa fa-file-pdf-o mr-2" aria-hidden="true"></i>
+                        PDF
+                    </a>
+                {if $bookInfo->title == "Lunar storm"}
+                    <a href="#" class="text-white bg-[#86b918] py-2 px-4 rounded-full">
+                        <i class="fa fa-file-epub mr-2" aria-hidden="true"></i>
+                        EPUB
+                    </a>
+                {/if}
                 </div>
             </div>
         </div>
