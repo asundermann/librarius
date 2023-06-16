@@ -96,7 +96,7 @@ final class BooksPresenter extends BasePresenter
             ->setSortable()
             ->setFilterText();
         $grid->addAction('edit','')
-            ->setIcon('pen')
+            ->setIcon('pencil')
             ->setTitle('Editovat');
         $grid->addAction('delete', '')
             ->setIcon('trash')

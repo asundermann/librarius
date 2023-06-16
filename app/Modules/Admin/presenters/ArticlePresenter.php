@@ -90,7 +90,7 @@ final class ArticlePresenter extends BasePresenter
         ->setSortable();
 
         $grid->addAction('edit','')
-        ->setIcon('pen')
+        ->setIcon('pencil')
         ->setTitle('Editovat');
         $grid->addAction('delete', '')
             ->setIcon('trash')

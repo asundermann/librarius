@@ -168,7 +168,7 @@ final class UsersPresenter extends BasePresenter
             ->setSortable();
 
         $grid->addAction('edit','')
-            ->setIcon('pen')
+            ->setIcon('pencil')
             ->setTitle('Editovat');
 
         $grid->addAction('delete', '')
