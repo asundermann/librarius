@@ -21,10 +21,13 @@
 
 	<body class="font-poppins">
 
+	<div class="loader-wrapper">
+		{include  COMPONENTS_DIR.'/Loader/Loader.latte' }
+	</div>
+
 	<div id="flash" n:foreach="$flashes as $flash"
             n:class="$flash->type == 'success' ?'bg-green-400':'bg-rose-600','p-4 text-white w-full text-center'">{$flash->message}
 	</div>
-
 
 	{include COMPONENTS_DIR.'/MainMenu/MainMenu.latte' }
 

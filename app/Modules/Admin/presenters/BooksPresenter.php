@@ -121,8 +121,10 @@ final class BooksPresenter extends BasePresenter
         $form->addTextArea(BooksRepository::PRIMARY_TABLE_CONTENT)
             ->setOption('class', 'wysiwyg-wrapper')
             ->setHtmlAttribute('class', 'js-wysiwyg');
+        $form->addHidden(BooksRepository::PRIMARY_TABLE_USER_PUBLISHED_ID);
+        $form->addHidden(BooksRepository::PRIMARY_TABLE_USER_EDITED_ID);
         $form->addUpload(BooksRepository::PRIMARY_TABLE_FILE_PDF)
-            ->addRule(Form::MIME_TYPE,'Požadovaný soubor musí být ve formátu PDF','application/x-pdf,application/pdf');
+            ->addRule(Form::MIME_TYPE,'Požadovaný soubor musí být ve formátu PDF','application/pdf');
         $form->addUpload(BooksRepository::PRIMARY_TABLE_FILE_EPUB)
             ->addRule(Form::MIME_TYPE,'Požadovaný soubor musí být ve formátu ePUB','application/epub+zip');
         $form->addUpload(BooksRepository::PRIMARY_TABLE_IMAGE)
@@ -139,12 +141,8 @@ final class BooksPresenter extends BasePresenter
     {
         $bookId = $this->getParameter('id');
 
-
-        $tmpImage = $data->image;
-        $tmpPdf = $data->file_pdf;
-        $tmpEpub = $data->file_epub;
-
         /**IMG**/
+        $tmpImage = $data->image;
         $sanitImageName = $tmpImage->getSanitizedName();
         $randImageName = $this->FileService->getRandomName($sanitImageName);
         $tmpImagePath = $tmpImage->getTemporaryFile();
@@ -152,6 +150,7 @@ final class BooksPresenter extends BasePresenter
         $data->image = $tmpImagePath;
 
         /**PDF**/
+        $tmpPdf = $data->file_pdf;
         $sanitPdfName = $tmpPdf->getSanitizedName();
         $randPdfName = $this->FileService->getRandomName($sanitPdfName);
         $tmpPdfPath = $tmpPdf->getTemporaryFile();
@@ -159,6 +158,7 @@ final class BooksPresenter extends BasePresenter
         $data->file_pdf = $tmpPdfPath;
 
         /**EPUB**/
+        $tmpEpub = $data->file_epub;
         $sanitEpubName = $tmpEpub->getSanitizedName();
         $randEpubName = $this->FileService->getRandomName($sanitEpubName);
         $tmpEpubPath = $tmpEpub->getTemporaryFile();
@@ -166,6 +166,7 @@ final class BooksPresenter extends BasePresenter
         $data->file_epub = $tmpEpubPath;
 
         if ($bookId) {
+            $data->user_edited_id = $this->getUser()->getId();
             $book = $this->booksRepository
                 ->findBookById($bookId)
                 ->fetch();
@@ -181,6 +182,8 @@ final class BooksPresenter extends BasePresenter
             $this->redirect('Books:edit',$book->id);
 
         } else {
+            $data->user_published_id = $this->getUser()->getId();
+            $data->user_edited_id = $this->getUser()->getId();
             $post = $this->booksRepository
                 ->insertBook($data);
             $this->FileService

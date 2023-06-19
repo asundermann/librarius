@@ -1,6 +1,7 @@
 /*@import "components/dropdown.css";*/
 
 @import "../../app/Components/HamburgerMenu/HamburgerMenu.css";
+@import "../../app/Components/Loader/Loader.css";
 @import "../../app/Components/DataGrid/DataGrid.css";
 
 @tailwind base;

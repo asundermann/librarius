@@ -7,11 +7,9 @@
         </div>
 
         <div class="p-6 flex flex-wrap h-full w-full justify-center md:justify-start">
-
 {*            TODO its for cycle now, for testing purposes
             chci aby tu byla lišta na vyhledávání + dynamické zobrazování
             *}
-
             {foreach $books as $book}
                 <a n:href=":detail, $book->id" class="w-full min-w-0 m-4 p-4 flex flex-col items-center md:w-max bg-white border border-gray-200 rounded-lg shadow  md:max-w-xl hover:bg-gray-100 hover:scale-105">
                     <div class="md:h-max mb-6">

@@ -1,6 +1,7 @@
 import "./ckeditor/ckeditor.js"
 import {initHamburgerMenu} from "./components/HamburgerMenu";
 import {initFlashMessageTimout} from "./components/FadeOut";
+import {initLoader} from "./components/Loader";
 let editor;
 
 function initCKEditor() {
@@ -121,6 +122,7 @@ export async function initAll() {
     initCKEditor()
     initHamburgerMenu()
     initFlashMessageTimout()
+    initLoader()
 }
 
 
