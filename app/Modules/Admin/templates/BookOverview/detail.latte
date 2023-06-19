@@ -2,8 +2,10 @@
 {block pageContent}
 
     <section class="h-full w-full">
-        <div class="p-12 flex items-center justify-center flex-wrap h-full w-full gap-9">
 
+        <a n:href=":default" class="p-12"><i class="fa fa-arrow-left" aria-hidden="true"></i> Zpět</a>
+
+        <div class="p-12 flex items-center justify-center flex-wrap h-full w-full gap-9">
             <div class="flex w-full h-full lg:w-[340px]">
                 <img src="{$basePath}/uploads/book-covers/{$bookInfo->image}"
                      class="w-50 h-50"
