@@ -4,4 +4,4 @@ services:
 	- App\Model\ArticleRepository
 	- App\Model\BooksRepository
 	- App\services\MyAuthenticator
-	- App\services\ImageService
+	- App\services\FileService

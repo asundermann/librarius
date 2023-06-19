@@ -10,6 +10,7 @@ use Nette\Application\UI\Form,
     Ublaboo\DataGrid\Localization\SimpleTranslator,
     App\Model\BooksRepository;
 
+use Nette\Utils\FileSystem;
 use function Symfony\Component\String\b;
 
 final class BooksPresenter extends BasePresenter
@@ -48,7 +49,8 @@ final class BooksPresenter extends BasePresenter
             $book = $this->booksRepository
                 ->findBookById($id)
                 ->fetch();
-            $this->imageService->deleteImage(self::IMAGE_DIR,$book->image);
+            $this->FileService->delete(self::IMAGE_DIR,$book->image);
+            FileSystem::delete(self::FILE_DIR.'/'.$book->title);
             $this->booksRepository->deleteBook($id);
             $this->flashMessage('Článek byl úspěšně smazán','success');
         } catch (Exception $e) {
@@ -119,11 +121,13 @@ final class BooksPresenter extends BasePresenter
         $form->addTextArea(BooksRepository::PRIMARY_TABLE_CONTENT)
             ->setOption('class', 'wysiwyg-wrapper')
             ->setHtmlAttribute('class', 'js-wysiwyg');
+        $form->addUpload(BooksRepository::PRIMARY_TABLE_FILE_PDF)
+            ->addRule(Form::MIME_TYPE,'Požadovaný soubor musí být ve formátu PDF','application/x-pdf,application/pdf');
+        $form->addUpload(BooksRepository::PRIMARY_TABLE_FILE_EPUB)
+            ->addRule(Form::MIME_TYPE,'Požadovaný soubor musí být ve formátu ePUB','application/epub+zip');
         $form->addUpload(BooksRepository::PRIMARY_TABLE_IMAGE)
             ->addRule($form::Image, 'Obrázek musí být v JPEG, PNG, GIF, WebP or AVIF.')
             ->setRequired();
-//        $form->addUpload(BooksRepository::PRIMARY_TABLE_FILE);
-
         $form->addSubmit('send',$caption)
             ->setHtmlAttribute('id','send');
         $form->onSuccess[] = [$this,'booksFormSucceeded'];
@@ -133,24 +137,44 @@ final class BooksPresenter extends BasePresenter
 
     public function booksFormSucceeded($form, $data)
     {
-
-        $tmpImage = $data->image;
         $bookId = $this->getParameter('id');
 
-        $sanitName = $tmpImage->getSanitizedName();
-        $randName = $this->imageService->getRandomName($sanitName);
 
+        $tmpImage = $data->image;
+        $tmpPdf = $data->file_pdf;
+        $tmpEpub = $data->file_epub;
+
+        /**IMG**/
+        $sanitImageName = $tmpImage->getSanitizedName();
+        $randImageName = $this->FileService->getRandomName($sanitImageName);
         $tmpImagePath = $tmpImage->getTemporaryFile();
-        $tmpImagePath = $randName;
-
+        $tmpImagePath = $randImageName;
         $data->image = $tmpImagePath;
+
+        /**PDF**/
+        $sanitPdfName = $tmpPdf->getSanitizedName();
+        $randPdfName = $this->FileService->getRandomName($sanitPdfName);
+        $tmpPdfPath = $tmpPdf->getTemporaryFile();
+        $tmpPdfPath = $randPdfName;
+        $data->file_pdf = $tmpPdfPath;
+
+        /**EPUB**/
+        $sanitEpubName = $tmpEpub->getSanitizedName();
+        $randEpubName = $this->FileService->getRandomName($sanitEpubName);
+        $tmpEpubPath = $tmpEpub->getTemporaryFile();
+        $tmpEpubPath = $randEpubName;
+        $data->file_epub = $tmpEpubPath;
 
         if ($bookId) {
             $book = $this->booksRepository
                 ->findBookById($bookId)
                 ->fetch();
-            $this->imageService
-                 ->updateImage($tmpImage,self::IMAGE_DIR,$book->image,$randName);
+            $this->FileService
+                 ->update($tmpImage,self::IMAGE_DIR,$book->image,$randImageName);
+            $this->FileService
+                 ->update($tmpPdf,self::FILE_DIR.'/'.$data->title,$book->file_pdf,$randPdfName);
+            $this->FileService
+                 ->update($tmpEpub,self::FILE_DIR.'/'.$data->title,$book->file_epub,$randEpubName);
             $this->booksRepository
                  ->updateBook($bookId,$data);
             $this->flashMessage('Článek byl upraven', 'success');
@@ -159,8 +183,12 @@ final class BooksPresenter extends BasePresenter
         } else {
             $post = $this->booksRepository
                 ->insertBook($data);
-            $this->imageService
-                 ->uploadImage($tmpImage,self::IMAGE_DIR,$randName);
+            $this->FileService
+                 ->upload($tmpImage,self::IMAGE_DIR,$randImageName);
+            $this->FileService
+                 ->upload($tmpPdf,self::FILE_DIR.'/'.$data->title,$randPdfName);
+            $this->FileService
+                 ->upload($tmpEpub,self::FILE_DIR.'/'.$data->title,$randEpubName);
             $this->flashMessage('Článek byl přidán', 'success');
             $this->redirect('Books:edit',$post->id);
         }

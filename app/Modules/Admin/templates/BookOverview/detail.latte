@@ -28,16 +28,24 @@
                 <div class="my-6">
                     <h1 class="text-xl mb-6 ">Ke stažení:</h1>
 
-                    <a href="#" class="text-white  bg-[#b30b00]  py-2 px-4 rounded-full mr-2">
+                {if $bookInfo->file_pdf != null}
+                    <a href="{$basePath}/uploads/book-files/{$bookInfo->title}/{$bookInfo->file_pdf}"
+                    class="text-white  bg-[#b30b00]  py-2 px-4 rounded-full mr-2"
+                    target="_blank">
                         <i class="fa fa-file-pdf-o mr-2" aria-hidden="true"></i>
                         PDF
                     </a>
-                {if $bookInfo->title == "Lunar storm"}
-                    <a href="#" class="text-white bg-[#86b918] py-2 px-4 rounded-full">
+                {/if}
+
+                {if $bookInfo->file_epub != null}
+                    <a href="{$basePath}/uploads/book-files/{$bookInfo->title}/{$bookInfo->file_epub}"
+                       class="text-white bg-[#86b918] py-2 px-4 rounded-full"
+                       target="_blank">
                         <i class="fa fa-file-epub mr-2" aria-hidden="true"></i>
                         EPUB
                     </a>
                 {/if}
+
                 </div>
             </div>
         </div>

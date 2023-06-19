@@ -14,7 +14,8 @@ class BooksRepository
           PRIMARY_TABLE_AUTHOR = 'author',
           PRIMARY_TABLE_CONTENT = 'content',
           PRIMARY_TABLE_IMAGE = 'image',
-          PRIMARY_TABLE_FILE = 'file';
+          PRIMARY_TABLE_FILE_PDF = 'file_pdf',
+          PRIMARY_TABLE_FILE_EPUB = 'file_epub';
 
 
     /** @var Nette\Database\Context */

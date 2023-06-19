@@ -7,7 +7,7 @@ use Nette,
     Nette\Utils\Image,
     Nette\Http\FileUpload;
 
-class ImageService
+class FileService
 {
     public function getRandomName(string $fileName): string
     {
@@ -16,20 +16,20 @@ class ImageService
         return md5(time() . rand()) . $ext;
     }
 
-    public function uploadImage($tmpImage,$directory,$randName)
+    public function upload($tmp,$directory,$randName)
     {
-        $tmpImage->move($directory.'/'.$randName);
+        $tmp->move($directory.'/'.$randName);
     }
 
-    public function deleteImage($directory,$randName)
+    public function delete($directory,$randName)
     {
         FileSystem::delete($directory.'/'.$randName);
     }
 
-    public function updateImage($tmpImage,$directory,$deletionImageName,$randName)
+    public function update($tmpImage,$directory,$deletionName,$randName)
     {
-        $this->deleteImage($directory,$deletionImageName);
-        $this->uploadImage($tmpImage,$directory,$randName);
+        $this->delete($directory,$deletionName);
+        $this->upload($tmpImage,$directory,$randName);
     }
 
 }
