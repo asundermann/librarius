@@ -18,14 +18,18 @@ final class UsersPresenter extends BasePresenter
 
     public function renderDefault()
     {
+        $this->canView();
     }
 
     public function renderAdd()
     {
+        $this->canAdd();
     }
 
     public function actionEdit($id)
     {
+        $this->canEdit();
+
         $user = $this->users
             ->getUserById($id);
 
@@ -41,6 +45,9 @@ final class UsersPresenter extends BasePresenter
     }
 
     public function actionDelete($id){
+
+        $this->canDelete();
+
         try {
             $this->users->deleteUser($id);
             $this->flashMessage('Článek byl úspěšně smazán','success');

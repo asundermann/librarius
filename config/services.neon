@@ -3,5 +3,6 @@ services:
 	- App\Model\UsersRepository
 	- App\Model\ArticleRepository
 	- App\Model\BooksRepository
-	- App\services\MyAuthenticator
+	- App\services\Authenticator
 	- App\services\FileService
+	- App\Services\Authorizator::create

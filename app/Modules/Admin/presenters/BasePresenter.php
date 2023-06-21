@@ -7,6 +7,7 @@ namespace App\Modules\Admin\presenters;
 use App\Model,
     App\services\FileService,
     Nette;
+use Nette\Application\ForbiddenRequestException;
 
 
 class BasePresenter extends Nette\Application\UI\Presenter
@@ -38,6 +39,19 @@ class BasePresenter extends Nette\Application\UI\Presenter
         $this->articles = $articles;
         $this->passwords = $passwords;
         $this->FileService = $FileService;
+
+    }
+    public function startup()
+    {
+        parent::startup();
+        $loggedUserId = $this->getUser()->getId();
+        $loggedUser = $this->users->findAll()->where('id',$loggedUserId)->fetch();
+        $this->template->loggedUser = $loggedUser;
+
+        if (!$this->getUser()->isLoggedIn())
+        {
+            $this->redirect('Login:default');
+        }
 
     }
 
@@ -126,19 +140,50 @@ class BasePresenter extends Nette\Application\UI\Presenter
         $this->template->year = $year->format('Y');
     }
 
-    public function startup()
+    private function isAllowed($privilege, $resource = null): bool
     {
-        parent::startup();
-
-        $loggedUserId = $this->getUser()->getId();
-        $loggedUser = $this->users->findAll()->where('id',$loggedUserId)->fetch();
-        $this->template->loggedUser = $loggedUser;
-
-        if (!$this->getUser()->isLoggedIn())
-        {
-            $this->redirect('Login:default');
-        }
-
+        $resource = $resource ?? $this->getCurrentPresenterName(); // current presenter name as fallback
+        return $this->user->isAllowed($resource, $privilege);
     }
 
+    public function canDelete($throwable = true, $resource = null): bool
+    {
+        $isAllowed = $this->isAllowed('delete', $resource);
+        if (!$isAllowed && $throwable) {
+            throw new ForbiddenRequestException('Na mazání nemáte práva');
+        }
+        return $isAllowed;
+    }
+
+    public function canEdit($throwable = true, $resource = null): bool
+    {
+        $isAllowed = $this->isAllowed('edit', $resource);
+        if (!$isAllowed && $throwable) {
+            throw new ForbiddenRequestException('Na úpravu nemáte práva');
+        }
+        return $isAllowed;
+    }
+
+    public function canAdd($throwable = true, $resource = null): bool
+    {
+        $isAllowed = $this->isAllowed('add', $resource);
+        if (!$isAllowed && $throwable) {
+            throw new ForbiddenRequestException('Na vytváření nemáte práva');
+        }
+        return $isAllowed;
+    }
+
+    public function canView($throwable = true, $resource = null): bool
+    {
+        $isAllowed = $this->isAllowed('view', $resource);
+        if (!$isAllowed && $throwable) {
+            $this->redirect('BookOverview:default');
+        }
+        return $isAllowed;
+    }
+
+    public function getCurrentPresenterName(): string
+    {
+        return explode(':', $this->name)[1];
+    }
 }

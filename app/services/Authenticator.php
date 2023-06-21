@@ -6,7 +6,7 @@ use Nette;
 use Nette\Security\SimpleIdentity;
 
 
-class MyAuthenticator implements Nette\Security\Authenticator
+class Authenticator implements Nette\Security\Authenticator
 {
     private $database;
     private $passwords;

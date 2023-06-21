@@ -21,15 +21,18 @@ final class BooksPresenter extends BasePresenter
 
     public function renderDefault()
     {
+        $this->canView();
     }
 
     public function renderAdd()
     {
+        $this->canAdd();
     }
 
     public function actionEdit($id)
     {
-        $book = $this->booksRepository
+            $this->canEdit();
+            $book = $this->booksRepository
             ->getBookById($id);
 
         if (!$book) {
@@ -45,6 +48,7 @@ final class BooksPresenter extends BasePresenter
 
     public function actionDelete($id)
     {
+        $this->canDelete();
         try {
             $book = $this->booksRepository
                 ->findBookById($id)
