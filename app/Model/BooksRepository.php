@@ -66,4 +66,17 @@ class BooksRepository
         $row->delete();
     }
 
+    public function getBooksCount(){
+        return $this->findAll()->count();
+    }
+
+    public function findBooksToOverview(int $limit, int $offset): Nette\Database\ResultSet
+    {
+        return $this->database->query('
+            SELECT * FROM books
+            LIMIT ? OFFSET ?',
+            $limit,$offset
+        );
+    }
+
 }
