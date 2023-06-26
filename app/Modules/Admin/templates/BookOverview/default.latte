@@ -1,15 +1,21 @@
 {block title}Přehled knih{/block}
 {block pageContent}
+<script src="{$basePath}/dist/js/components/SearchBar.js"></script>
 
-    <section class="h-full w-full">
-        <div class="p-6">
+    <section class="h-full w-full p-6">
+        <div class="my-6">
             <h1 class="text-2xl mb-2">Přehled knih</h1><hr>
         </div>
 
-        <div class="p-6 flex flex-wrap h-full w-full justify-center md:justify-start">
-{*            TODO its for cycle now, for testing purposes
-            chci aby tu byla lišta na vyhledávání + dynamické zobrazování
-            *}
+        <div class="flex">
+            <form n:name=searchForm  id="searchBar" class="border border-black p-4 rounded-full">
+                <input n:name=term placeholder="Hledej..." class="focus:outline-0">
+                <button n:name=send><i class="fa fa-search" aria-hidden="true"></i></button>
+            </form>
+        </div>
+
+        <div class="my-4 flex flex-wrap h-full w-full justify-center md:justify-start">
+
             {foreach $books as $book}
                 <a n:href=":detail, $book->id" class="w-full min-w-0 m-4 p-4 flex flex-col items-center md:w-max bg-white border border-gray-200 rounded-lg shadow  md:max-w-xl hover:bg-gray-100 hover:scale-105">
                     <div class="md:h-max mb-6">

@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Modules\Admin\presenters;
 
-use Nette;
+use Nette,
+   Nette\Application\UI\Form;
 
 
 final class BookOverviewPresenter extends BasePresenter
@@ -35,6 +36,18 @@ final class BookOverviewPresenter extends BasePresenter
         }
 
         $this->template->bookInfo = $book;
+    }
+
+    protected function createComponentSearchForm()
+    {
+        $form = new Form;
+
+        $form->addText('term', '');
+
+        $form->addSubmit('send','' );
+
+        $form->onSuccess[] = [$this, 'searchFormSucceeded'];
+        return $form;
     }
 
 }
