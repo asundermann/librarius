@@ -1,0 +1,54 @@
+{block title}Přehled knih{/block}
+{block pageContent}
+<script src="{$basePath}/dist/js/components/SearchBar.js"></script>
+
+    <section class="h-full w-full p-6">
+        <div class="my-6">
+            <h1 class="text-2xl mb-2">Vyhledávání</h1><hr>
+        </div>
+
+        <div class="flex gap-9">
+            <form n:name=searchForm  id="searchBar" class="border border-black p-4 rounded-full">
+                <input n:name=term placeholder="Hledej..." class="focus:outline-0">
+                <button n:name=send><i class="fa fa-search" aria-hidden="true"></i></button>
+            </form>
+{*            <button> Zkusím štěstí</button> TODO maybe add this as a random books on page generator??*}
+        </div>
+        <p class="p-2"><small>Hledaný výraz "{$term}"</small></p>
+
+        <div class="my-4 flex flex-wrap h-full w-full justify-center md:justify-start">
+            {if !$books}
+                <div class="h-full w-full flex flex-col items-center">
+                    <div class="w-[200px] my-12 justify-center md:my-6">
+                        <img src="{$basePath}/dist/img/static/empty-folder.png" alt="nothing-found">
+                    </div>
+                    <p>Je mi líto, ale toto v knihovně nemám...</p>
+                </div>
+            {else}
+                {foreach $books as $book}
+                    <a n:href=":detail, $book->id" class="w-full min-w-0 m-4 p-4 flex flex-col items-center md:w-max bg-white border border-gray-200 rounded-lg shadow  md:max-w-xl hover:bg-gray-100 hover:scale-105">
+                        <div class="md:h-max mb-6">
+                            <img class="object-contain w-full rounded-t-lg md:object-cover md:h-auto md:w-48 md:rounded-none md:rounded-l-lg"
+                                 src="{$basePath}/uploads/book-covers/{$book->image}"
+                                 alt="Kniha:{$book->title}"
+                            >
+                        </div>
+                        <div class="text-center flex flex-col md:h-auto md:w-48 md:rounded-none md:rounded-l-lg leading-normal">
+                            <p class="mb-2  text-sm font-normal text-gray-700">
+                                {$book->author}
+                            </p>
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
+                                {$book->title}
+                            </h5>
+                            <p class="mb-3 font-normal text-gray-700">
+                                {$book->content|truncate:50|noescape}
+                            </p>
+                        </div>
+                    </a>
+                {/foreach}
+            {/if}
+
+        </div>
+
+
+    </section>

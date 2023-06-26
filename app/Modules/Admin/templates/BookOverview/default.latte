@@ -7,11 +7,12 @@
             <h1 class="text-2xl mb-2">Přehled knih</h1><hr>
         </div>
 
-        <div class="flex">
+        <div class="flex gap-9">
             <form n:name=searchForm  id="searchBar" class="border border-black p-4 rounded-full">
                 <input n:name=term placeholder="Hledej..." class="focus:outline-0">
                 <button n:name=send><i class="fa fa-search" aria-hidden="true"></i></button>
             </form>
+{*            <button> Zkusím štěstí</button> TODO maybe add this as a random books on page generator??*}
         </div>
 
         <div class="my-4 flex flex-wrap h-full w-full justify-center md:justify-start">

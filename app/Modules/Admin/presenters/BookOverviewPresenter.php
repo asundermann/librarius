@@ -6,6 +6,7 @@ namespace App\Modules\Admin\presenters;
 
 use Nette,
    Nette\Application\UI\Form;
+use function Symfony\Component\String\b;
 
 
 final class BookOverviewPresenter extends BasePresenter
@@ -26,6 +27,12 @@ final class BookOverviewPresenter extends BasePresenter
 
     }
 
+    public function renderResults($term)
+    {
+        $this->template->term = $term;
+        $this->template->books =  $this->booksRepository->findBooksBySearchBar($term)->fetchAll();
+    }
+
     public function renderDetail($id)
     {
         $book = $this->booksRepository
@@ -42,12 +49,17 @@ final class BookOverviewPresenter extends BasePresenter
     {
         $form = new Form;
 
-        $form->addText('term', '');
-
+        $form->addText('term', '')
+        ->setRequired();
         $form->addSubmit('send','' );
 
         $form->onSuccess[] = [$this, 'searchFormSucceeded'];
         return $form;
+    }
+
+    public function searchFormSucceeded($form, $data)
+    {
+        $this->redirect(':results', $data->term);
     }
 
 }

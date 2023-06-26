@@ -33,6 +33,16 @@ class BooksRepository
         return $this->database->table(self::PRIMARY_TABLE);
     }
 
+
+    public function findBooksBySearchBar($params)
+    {
+        return $this->database
+            ->query("SELECT * FROM `books` 
+                         WHERE `author` 
+                         LIKE '%$params%' OR `title`
+                         LIKE '%$params%';");
+    }
+
     public function findBookById($id): Selection
     {
         return $this->database
@@ -78,5 +88,6 @@ class BooksRepository
             $limit,$offset
         );
     }
+
 
 }
