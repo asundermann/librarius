@@ -7,13 +7,21 @@
             <h1 class="text-2xl mb-2">Přehled knih</h1><hr>
         </div>
 
-        <div class="flex gap-9">
+        <div class="flex flex-wrap gap-9 items-center md:flex-row">
             <form n:name=searchForm  id="searchBar" class="border border-black p-4 rounded-full">
                 <input n:name=term placeholder="Hledej..." class="focus:outline-0">
                 <button n:name=send><i class="fa fa-search" aria-hidden="true"></i></button>
             </form>
-{*            <button> Zkusím štěstí</button> TODO maybe add this as a random books on page generator??*}
+
+            <span class="text-2xl cursor-pointer" id="info" >
+                <i class="fa fa-info-circle ml-2" aria-hidden="true"></i>
+            </span>
         </div>
+
+        {include COMPONENTS_DIR.'/InfoModal/InfoModal.latte'
+            'heading' => 'Přehled knih',
+            'text' => '   Zde můžete najít přehled všech nahraných e-knih. Pokud vás nějaká zaujme, stačí kliknout na její miniaturu.Ta vás přesune na její detail, kde najdete veškeré informace a stažitelné soubory.<br><br> Případně můžete využít vyhledávací pole, kam zadáte buď název knihy či autora.'
+        }
 
         <div class="my-4 flex flex-wrap h-full w-full justify-center md:justify-start">
 
@@ -44,3 +52,4 @@
             {include COMPONENTS_DIR.'/Pagination/Pagination.latte' }
         </div>
     </section>
+<script src="{$basePath}/dist/js/components/InfoModal.js"></script>

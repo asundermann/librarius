@@ -15,7 +15,8 @@ module.exports = {
       },
       colors: {
         librarius: {
-          900: '#c0168a'
+          900: '#c0168a',
+          100: '#d14d9c'
         }
       }
     },

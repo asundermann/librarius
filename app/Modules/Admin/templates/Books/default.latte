@@ -7,12 +7,21 @@
             <div class="mt-6 phone:block md:hidden">Pokud nevidíte tabulku, je třeba větší rozlišení. Zkuste překlopit mobil do širokého rozlišení.</div>
 
 
-            <div class="mt-10">
+            <div class="mt-10 flex items-center">
                 {include COMPONENTS_DIR.'/ActionButton/ActionButton.latte',
                 "link" => "Books:add",
                 "text" => "Nahrát knihu"
                 }
+
+                <span class="text-2xl cursor-pointer" id="info" >
+                    <i class="fa fa-info-circle ml-4" aria-hidden="true"></i>
+                </span>
             </div>
+
+            {include COMPONENTS_DIR.'/InfoModal/InfoModal.latte'
+            'heading' => 'Nahrávání',
+            'text' => 'Zde můžete nahrávat nové e-knihy. Budete přesměrováni na formulář, který je třeba vyplnit. Pokud bude vyplnění úspěšné, vytvoříte tak novou kartu knihy se všemi náležícími informacemi.<br><br> <strong>POZOR!</strong> <br>Je nutné, abyste vyplnili oba soubory PDF tak ePub. Jestliže nemáte jedno nebo druhé, můžete využít program <a href="https://calibre-ebook.com/download" target="_blank" class="text-librarius-100">calibre</a>, který nabízí konverzi formátů.'
+            }
 
             <div class=" phone:hidden md:flex lg:block my-10 h-full w-full">
                {control grid}
@@ -21,3 +30,5 @@
         </div>
 
     </section>
+
+<script src="{$basePath}/dist/js/components/InfoModal.js"></script>
