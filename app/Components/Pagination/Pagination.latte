@@ -8,7 +8,6 @@
     <a id="pages-{$i}" n:href="default, $i" class="m-2 text-gray-500">{$i}</a>
 {/for}
 
-
 {if !$paginator->isLast()}
     <a n:href="default, $paginator->getPage() + 1" class="m-4">
         <i class="fa fa-angle-right text-gray-500" aria-hidden="true"></i>
