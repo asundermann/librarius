@@ -8,6 +8,7 @@ document.addEventListener('click', (event) =>
 
     do {
         if (targetEl == searchBar){
+            searchForm.classList.remove('border-black')
             searchForm.classList.add('border-librarius-900')
             magnifyingGlass.classList.add('text-librarius-900')
             return
@@ -15,6 +16,7 @@ document.addEventListener('click', (event) =>
         targetEl = targetEl.parentNode;
 
     } while (targetEl);
+        searchForm.classList.add('border-black')
         searchForm.classList.remove('border-librarius-900')
         magnifyingGlass.classList.remove('text-librarius-900')
 

@@ -8,7 +8,7 @@
         </div>
 
         <div class="flex flex-wrap gap-9 items-center md:flex-row">
-            <form n:name=searchForm  id="searchBar" class="border border-black p-4 rounded-full">
+            <form n:name=searchForm  id="searchBar" class="border border-black p-4 rounded-full ">
                 <input n:name=term placeholder="Hledej..." class="focus:outline-0">
                 <button n:name=send><i class="fa fa-search" aria-hidden="true"></i></button>
             </form>
@@ -52,4 +52,3 @@
             {include COMPONENTS_DIR.'/Pagination/Pagination.latte' }
         </div>
     </section>
-<script src="{$basePath}/dist/js/components/InfoModal.js"></script>
