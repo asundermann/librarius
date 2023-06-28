@@ -19,8 +19,18 @@
                 </div>
 
                 <div class="my-6">
-                    <a href="#" class="text-black  border border-black py-2 px-4 rounded-full mr-2">Koupit originál</a>
-                    <a href="#" class="text-black  border border-black py-2 px-4 rounded-full">Recenze</a>
+                    {if $bookInfo->buy_original != null}
+                        <a href="{$bookInfo->buy_original}"
+                           class="text-black  border border-black py-2 px-4 rounded-full mr-2"
+                           target="_blank">Koupit originál
+                        </a>
+                    {/if}
+                    {if $bookInfo->review != null}
+                        <a href="{$bookInfo->review}"
+                           class="text-black  border border-black py-2 px-4 rounded-full"
+                           target="_blank">Recenze
+                        </a>
+                    {/if}
                 </div><hr>
 
                 <div class="my-6">{$bookInfo->content|noescape}</div><hr>

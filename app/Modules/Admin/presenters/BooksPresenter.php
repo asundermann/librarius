@@ -122,15 +122,19 @@ final class BooksPresenter extends BasePresenter
             ->setRequired();
         $form->addText(BooksRepository::PRIMARY_TABLE_AUTHOR)
             ->setRequired();
+        $form->addText(BooksRepository::PRIMARY_TABLE_BUY_ORIGINAL);
+        $form->addText(BooksRepository::PRIMARY_TABLE_REVIEW);
         $form->addTextArea(BooksRepository::PRIMARY_TABLE_CONTENT)
             ->setOption('class', 'wysiwyg-wrapper')
             ->setHtmlAttribute('class', 'js-wysiwyg');
         $form->addHidden(BooksRepository::PRIMARY_TABLE_USER_PUBLISHED_ID);
         $form->addHidden(BooksRepository::PRIMARY_TABLE_USER_EDITED_ID);
         $form->addUpload(BooksRepository::PRIMARY_TABLE_FILE_PDF)
-            ->addRule(Form::MIME_TYPE,'Požadovaný soubor musí být ve formátu PDF','application/pdf');
+            ->addRule(Form::MIME_TYPE,'Požadovaný soubor musí být ve formátu PDF','application/pdf')
+            ->setRequired();
         $form->addUpload(BooksRepository::PRIMARY_TABLE_FILE_EPUB)
-            ->addRule(Form::MIME_TYPE,'Požadovaný soubor musí být ve formátu ePUB','application/epub+zip');
+            ->addRule(Form::MIME_TYPE,'Požadovaný soubor musí být ve formátu ePUB','application/epub+zip')
+            ->setRequired();
         $form->addUpload(BooksRepository::PRIMARY_TABLE_IMAGE)
             ->addRule($form::Image, 'Obrázek musí být v JPEG, PNG, GIF, WebP or AVIF.')
             ->setRequired();

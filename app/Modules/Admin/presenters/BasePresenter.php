@@ -82,7 +82,7 @@ class BasePresenter extends Nette\Application\UI\Presenter
                 ];
         } elseif($loggedUser->role == "admin")
         {
-        $this->template->navItems =
+            $this->template->navItems =
         [
                     'Overview' => (object) [
                         'presenter' => 'BookOverview:default',
