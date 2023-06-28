@@ -21,6 +21,18 @@
                     </label>
                 </div>
 
+                <div class="mt-2">
+                    <label n:name=buy_original>Koupit originál <br>
+                        <input n:name=buy_original autofocus class="{$inputStyle}">
+                    </label>
+                </div>
+
+                <div class="mt-2">
+                    <label n:name=review>Recenze <br>
+                        <input n:name=review autofocus class="{$inputStyle}">
+                    </label>
+                </div>
+
                 <div class="mt-2 wysiwyg-wrapper">
                     <label n:name=content>Obsah<br></label>
                     <textarea n:name=content></textarea>
@@ -30,14 +42,18 @@
                         <label n:name=file_pdf>PDF<br>
                             <input n:name=file_pdf class="{$inputStyle}">
                         </label>
-                        <p class><i class="fa fa-file mr-2 text-gray-500" aria-hidden="true"></i>{$bookArray['file_pdf']}</p>
+                        <a href="{$basePath}/uploads/book-files/{$bookArray['title']}/{$bookArray['file_pdf']}" download>
+                            <p class><i class="fa fa-file mr-2 text-gray-500" aria-hidden="true"></i>{$bookArray['file_pdf']}</p>
+                        </a>
                     </div>
 
                     <div class="mt-2">
                         <label n:name=file_epub>ePUB<br>
                             <input n:name=file_epub class="{$inputStyle}">
                         </label>
-                        <p><i class="fa fa-file mr-2 text-gray-500" aria-hidden="true"></i>{$bookArray['file_epub']}</p>
+                        <a href="{$basePath}/uploads/book-files/{$bookArray['title']}/{$bookArray['file_epub']}" download>
+                            <p><i class="fa fa-file mr-2 text-gray-500" aria-hidden="true"></i>{$bookArray['file_epub']}</p>
+                        </a>
                     </div>
 
                 <div class="mt-2">
@@ -45,7 +61,9 @@
                         <input n:name=image class="{$inputStyle}">
                     </label>
                     <div class="w-[200px] mt-2">
-                        <img src="{$basePath}/uploads/book-covers/{$bookArray['image']}" >
+                        <a href="{$basePath}/uploads/book-covers/{$bookArray['image']}" download>
+                            <img src="{$basePath}/uploads/book-covers/{$bookArray['image']}">
+                        </a>
                     </div>
                 </div>
 
