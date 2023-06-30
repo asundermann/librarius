@@ -101,11 +101,11 @@ class BasePresenter extends Nette\Application\UI\Presenter
                         'icon' => 'fas fa-book-open',
                         'title' => 'Knihy',
                     ],
-                    'Articles' => (object) [
-                        'presenter' => 'Article:default',
-                        'icon' => 'fas fa-folder-open',
-                        'title' => 'Články',
-                    ],
+//                    'Articles' => (object) [
+//                        'presenter' => 'Article:default',
+//                        'icon' => 'fas fa-folder-open',
+//                        'title' => 'Články',
+//                    ],
                     'Users' => (object) [
                         'presenter' => 'Users:default',
                         'icon' => 'fas fa-user-circle',
