@@ -18,7 +18,24 @@ final class RouterFactory
 
 //        ADMIN MODULE
         $router->withModule('Admin')
-               ->addRoute('<presenter>/<action>[/<id>]', 'Login:default');
+        ->addRoute('prihlaseni','Login:default')
+
+        ->addRoute('prehled', 'BookOverview:default')
+        ->addRoute('prehled/detail-knihy[/<id>]', 'BookOverview:detail')
+
+        ->addRoute('o-projektu', 'About:default')
+
+        ->addRoute('knihy', 'Books:default')
+        ->addRoute('nahrat-knihu', 'Books:add')
+        ->addRoute('editovat-knihu[/<id>]', 'Books:edit')
+
+        ->addRoute('uzivatele', 'Users:default')
+        ->addRoute('pridat-uzivatele', 'Users:add')
+        ->addRoute('editovat-uzivatele[/<id>]', 'Users:edit')
+
+        //Default route
+        ->addRoute('<presenter>/<action>[/<id>]', 'Login:default');
+
 
 ///     I dont need it for now
 ///         FRONT MODULE
