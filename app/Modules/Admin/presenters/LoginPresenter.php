@@ -67,6 +67,7 @@ final class LoginPresenter extends Nette\Application\UI\Presenter
             $this->redirect('Login:default');
         }
 
+        $this->flashMessage('Byl/a jsi úspěšně přihlášen.','success');
         $this->redirect('BookOverview:default');
     }
 
