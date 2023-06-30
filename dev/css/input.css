@@ -34,3 +34,7 @@
 .ck-editor__editable {
     height: 100%;
 }
+
+.border-librarius-900 {
+    border: solid 1px #c0168a;
+}
