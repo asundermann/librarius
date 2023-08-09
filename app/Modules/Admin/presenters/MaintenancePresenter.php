@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Modules\Admin\presenters;
 
 
-use App\Model\BooksRepository;
-use Nette\Forms\Form;
+use Nette\Forms\Form,
+    App\Model\GenresRepository;
 
 final class MaintenancePresenter extends BasePresenter
 {
@@ -35,7 +35,29 @@ final class MaintenancePresenter extends BasePresenter
     }
     public function contactFormSuceeded($form,$data)
     {
-
     }
 
+    public function createComponentGenreForm()
+    {
+        $form = new \Nette\Application\UI\Form();
+
+        $form->addText(GenresRepository::PRIMARY_TABLE_GENRE,'Žánry')
+            ->setRequired();
+        $form->addSubmit('send','Potvrdit');
+
+        $form->onSuccess[] = [$this,'genreFormSuceeded'];
+
+        return $form;
+    }
+
+    public function genreFormSuceeded($form,$data)
+    {
+        $inputGenre = explode(', ',$data->genre);
+
+        foreach ($inputGenre as $item){
+            $data->genre = $item;
+            $this->genresRepository->findAll()->insert($data);
+        }
+
+    }
 }

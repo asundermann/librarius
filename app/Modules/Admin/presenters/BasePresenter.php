@@ -19,6 +19,8 @@ class BasePresenter extends Nette\Application\UI\Presenter
     public $users;
     /** @var Model\BooksRepository */
     public $booksRepository;
+    /** @var Model\GenresRepository */
+    public $genresRepository;
     /** @var Model\ArticleRepository */
     public $articles;
     /** @var FileService */
@@ -31,11 +33,13 @@ class BasePresenter extends Nette\Application\UI\Presenter
         Model\ArticleRepository $articles,
         Nette\Security\Passwords $passwords,
         Model\BooksRepository $booksRepository,
+        Model\GenresRepository $genresRepository,
         FileService $FileService
     )
     {
         $this->users = $users;
         $this->booksRepository = $booksRepository;
+        $this->genresRepository = $genresRepository;
         $this->articles = $articles;
         $this->passwords = $passwords;
         $this->FileService = $FileService;
@@ -110,7 +114,12 @@ class BasePresenter extends Nette\Application\UI\Presenter
                         'presenter' => 'Users:default',
                         'icon' => 'fas fa-user-circle',
                         'title' => 'Uživatelé',
-                    ]
+                    ],
+                    'Maintenance' => (object) [
+                        'presenter' => 'Maintenance:default',
+                        'icon' => 'fas fa-gear',
+                        'title' => 'Nastavení',
+                ]
                 ];
         }elseif($loggedUser->role == "librarius")
         {

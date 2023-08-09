@@ -1,3 +1,5 @@
+{var $inputStyle = 'mt-2 p-2 border-solid border-2 border border-slate-200 w-full'}
+
 {define title}Přehled knih{/define}
 {block pageContent}
 
@@ -5,8 +7,20 @@
     <div class="mb-6">
         <h1 class="text-2xl mb-2">Servis</h1><hr>
     </div>
+{*TODO tady bude nastavitelnost nových tagů, žánrů  *}
+    <div class="mx-6 mt-6">
+        <form n:name="genreForm">
 
-    <div class="flex flex-wrap gap-9 items-center md:flex-row">
+            <div>
+                <label n:name=genre>Žánry <br>
+                    <input n:name=genre size=20 autofocus class="{$inputStyle}">
+                </label>
+            </div>
 
+            <div>
+                <input n:name=send class="mt-4 bg-slate-600 text-white py-4 px-10 cursor-pointer">
+            </div>
+
+        </form>
     </div>
 </section>

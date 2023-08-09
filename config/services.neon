@@ -3,6 +3,7 @@ services:
 	- App\Model\UsersRepository
 	- App\Model\ArticleRepository
 	- App\Model\BooksRepository
+	- App\Model\GenresRepository
 	- App\services\Authenticator
 	- App\services\FileService
 	- App\Services\Authorizator::create
