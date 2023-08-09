@@ -25,6 +25,7 @@ class Authorizator
         $acl->addResource('BookOverview');
         $acl->addResource('Books');
         $acl->addResource('Users');
+        $acl->addResource('Maintenance');
 
 
         // rules

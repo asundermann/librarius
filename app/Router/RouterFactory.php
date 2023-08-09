@@ -33,6 +33,9 @@ final class RouterFactory
         ->addRoute('pridat-uzivatele', 'Users:add')
         ->addRoute('editovat-uzivatele[/<id>]', 'Users:edit')
 
+        ->addRoute('kontaktni-formular','Maintenance:contact')
+        ->addRoute('faq','Maintenance:faq')
+
         //Default route
         ->addRoute('<presenter>/<action>[/<id>]', 'Login:default');
 

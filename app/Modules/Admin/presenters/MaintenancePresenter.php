@@ -13,22 +13,29 @@ final class MaintenancePresenter extends BasePresenter
 
     public function renderDefault()
     {
+        $this->canView();
+    }
+    public function renderContact()
+    {
     }
 
-    public function createComponentMaintenanceForm()
+    public function createComponentContactForm()
     {
-        $form = new \Nette\Application\UI\Form;
+        $form = new \Nette\Application\UI\Form();
 
-        $form->addUpload('soubor','Soubor');
+        $form->addEmail('email','E-mail')
+            ->setRequired();
+        $form->addTextArea('content','Obsah zprávy')
+            ->setRequired();
         $form->addSubmit('send','Odeslat');
-        $form->onSuccess[] = [$this,'maintenanceFormSucceeded'];
-
+//        $form->addUpload('file','Soubor');
+        $form->onSuccess[] = [$this,'contactFormSuceeded'];
 
         return $form;
     }
-
-    public function maintenanceFormSucceeded($form,$data)
+    public function contactFormSuceeded($form,$data)
     {
-        $soubor = $data->soubor;
+
     }
+
 }
