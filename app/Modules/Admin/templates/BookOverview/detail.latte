@@ -3,10 +3,12 @@
 
     <section class="h-full w-full">
 
-        <a n:href=":default" class="p-12"><i class="fa fa-arrow-left" aria-hidden="true"></i> Zpět</a>
+        <a n:href=":default" class="p-12 hover:text-librarius-900 ease-in-out duration-200">
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            Zpět
+        </a>
 
         <div class="p-12 flex items-center justify-center flex-wrap h-full w-full gap-9">
-{*            <div class="flex w-full h-full lg:w-[340px]">*}
             <div class="flex h-[500px] w-[340px]">
                 <img src="{$basePath}/uploads/book-covers/{$bookInfo->image}"
                      class="object-cover"
