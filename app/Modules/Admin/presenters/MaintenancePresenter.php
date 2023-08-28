@@ -7,6 +7,9 @@ namespace App\Modules\Admin\presenters;
 
 use Nette\Forms\Form,
     App\Model\GenresRepository;
+use Nette\Utils\ArrayHash;
+use Nette\Utils\Arrays;
+use function Symfony\Component\String\b;
 
 final class MaintenancePresenter extends BasePresenter
 {
@@ -14,6 +17,7 @@ final class MaintenancePresenter extends BasePresenter
     public function renderDefault()
     {
         $this->canView();
+        $this->template->genres = $this->genresRepository->findAll()->fetchAll();
     }
     public function renderContact()
     {
@@ -55,11 +59,14 @@ final class MaintenancePresenter extends BasePresenter
     public function genreFormSuceeded($form,$data)
     {
         $inputGenre = explode(', ',$data->genre);
-
         foreach ($inputGenre as $item){
-            $data->genre = $item;
-            $this->genresRepository->findAll()->insert($data);
+            $this->genresRepository->findAll()->insert(['genre' => $item]);
         }
+    }
 
+    public function actionDeleteGenre($id)
+    {
+        $this->genresRepository->deleteGenre($id);
+        $this->redirect(":default");
     }
 }

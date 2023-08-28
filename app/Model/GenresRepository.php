@@ -31,4 +31,22 @@ class GenresRepository
         return $this->findAll()->insert($data);
     }
 
+    public function findGenreById(int $id): Selection
+    {
+        return $this->database
+            ->table(self::PRIMARY_TABLE)
+            ->where('id', $id);
+    }
+
+    public function deleteGenre($id)
+    {
+        $row = $this->findGenreById($id);
+
+        $user = $row->fetch();
+        if (!$user) {
+            throw new Exception('Record does not exist');
+        }
+        $row->delete();
+    }
+
 }
