@@ -23,6 +23,8 @@ final class MaintenancePresenter extends BasePresenter
     {
         $form = new \Nette\Application\UI\Form();
 
+        $form->addEmail('name','Jméno')
+            ->setRequired();
         $form->addEmail('email','E-mail')
             ->setRequired();
         $form->addTextArea('content','Obsah zprávy')

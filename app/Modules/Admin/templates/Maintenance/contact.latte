@@ -2,31 +2,42 @@
 
 {define title}Kontaktní formulář{/define}
 {block pageContent}
-<section class="h-full w-full">
-    <div class="p-6">
-        <h1 class="text-2xl mb-2">Kontaktní formulář</h1><hr>
+<section class="h-full w-full lg:w-[calc(100%-576px)]">
+    <div class="w-full  bg-slate-200 lg:p-12 lg:w-1/2 lg:mx-auto ">
 
-        <div class="mx-6 mt-6">
+        <h1 class="text-2xl text-center p-4 ">Kontaktuje mě</h1>
+        <p class="text-md text-center text-slate-600 ">
+            Nenašli jste svou odpověď ve <a class="text-librarius-100" href="#">FAQ</a>?
+            Nebo mi snad chcete poslat nějaké soubory či návrhy na změnu? Pak využijte formulář níže.
+        </p>
+
+        <div class="mx-6 mt-6 p-4 lg:p-12">
+
             <form n:name="contactForm">
 
-                <div>
-                    <label n:name=email>Email <br>
-                        <input n:name=email size=20 autofocus class="{$inputStyle}">
+                <div class="lg:grid lg:grid-cols-2 lg:gap-4">
+
+                    <label n:name=name>Jméno <br>
+                        <input n:name=name size=20 autofocus class="{$inputStyle}" placeholder="Petr">
                     </label>
+
+                    <label n:name=email>Email <br>
+                        <input n:name=email size=20 autofocus class="{$inputStyle}" placeholder="email@net.cz">
+                    </label>
+
                 </div>
 
-                <div class="mt-2">
+                <div class="mt-10">
                     <label n:name=content>Obsah zprávy <br>
-                        <textarea n:name=content autofocus class="{$inputStyle}" rows="7" cols="50">
-                        </textarea>
+                        <textarea n:name=content autofocus class="{$inputStyle}" rows="7" cols="50" placeholder="Zde napište svou zprávu..."></textarea>
                     </label>
                 </div>
 
                 <div>
                     <input n:name=send class="mt-4 bg-slate-600 text-white py-4 px-10 cursor-pointer">
                 </div>
-
             </form>
+
         </div>
 
     </div>
