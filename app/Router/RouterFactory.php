@@ -35,6 +35,7 @@ final class RouterFactory
 
         ->addRoute('kontaktni-formular','Maintenance:contact')
         ->addRoute('faq','Maintenance:faq')
+        ->addRoute('nastaveni','Maintenance:default')
 
         //Default route
         ->addRoute('<presenter>/<action>[/<id>]', 'Login:default');
