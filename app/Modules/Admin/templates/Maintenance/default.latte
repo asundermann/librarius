@@ -5,23 +5,23 @@
 
 <section class="h-full w-full p-6">
     <div class="mb-6">
-        <h1 class="text-2xl mb-2">Servis</h1><hr>
+        <h1 class="text-2xl mb-2">Nastavení</h1><hr>
     </div>
-{*TODO tady bude nastavitelnost nových tagů, žánrů  *}
     <div class="mx-6 mt-6">
         <form n:name="genreForm">
 
             <div>
-                <label n:name=genre>Žánry <br>
+                <label n:name=genre>Kategorie <br>
+                    <p class="text-sm">Lze vkládat jednu i více najednou, jen je nutné jednotlivé kategorie oddělovat čárkou tzn.: (kategorie, nová...)</p>
                     <input n:name=genre size=20 autofocus class="{$inputStyle}">
                 </label>
             </div>
 
-            <div class="my-8">
-                <span>Uložené:</span>
+            <div class="my-4 flex flex-wrap">
+                <span class="self-center mr-2">Uložené:</span>
                 {foreach $genres as $genre}
-                    <span class="bg-librarius-100 text-white font-bold py-2 px-4 rounded-full">
-                        {$genre->genre} <a n:href="Maintenance:deleteGenre, $genre->id" class="ml-4 hover:text-black">✕</a>
+                    <span class="bg-librarius-100 text-white font-bold py-2 px-4 rounded-full m-0.5">
+                        {$genre->genre} <a n:href="Maintenance:deleteGenre, $genre->id" class="ml-4 hover:text-slate-600">✕</a>
                     </span>
                 {/foreach}
             </div>

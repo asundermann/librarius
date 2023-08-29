@@ -14,6 +14,7 @@ class BooksRepository
           PRIMARY_TABLE_AUTHOR = 'author',
           PRIMARY_TABLE_BUY_ORIGINAL = 'buy_original',
           PRIMARY_TABLE_REVIEW = 'review',
+          PRIMARY_TABLE_GENRE = 'genre',
           PRIMARY_TABLE_CONTENT = 'content',
           PRIMARY_TABLE_IMAGE = 'image',
           PRIMARY_TABLE_FILE_PDF = 'file_pdf',

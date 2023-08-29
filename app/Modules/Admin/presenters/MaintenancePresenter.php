@@ -49,7 +49,7 @@ final class MaintenancePresenter extends BasePresenter
 
         $form->addText(GenresRepository::PRIMARY_TABLE_GENRE,'Žánry')
             ->setRequired();
-        $form->addSubmit('send','Potvrdit');
+        $form->addSubmit('send','Uložit');
 
         $form->onSuccess[] = [$this,'genreFormSuceeded'];
 

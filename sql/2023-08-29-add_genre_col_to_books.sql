@@ -1,0 +1,1 @@
+ALTER TABLE `books` ADD `genre` VARCHAR(255) NOT NULL AFTER `author`;
