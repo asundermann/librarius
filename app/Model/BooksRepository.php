@@ -43,7 +43,9 @@ class BooksRepository
             ->query("SELECT * FROM `books` 
                          WHERE `author` 
                          LIKE '%$params%' OR `title`
-                         LIKE '%$params%';");
+                         LIKE '%$params%' OR `genre`
+                         LIKE '%$params%'
+                    ;");
     }
 
     public function findBookById($id): Selection
