@@ -159,62 +159,62 @@ final class BooksPresenter extends BasePresenter
 
         bdump($data);
 
-//        $bookId = $this->getParameter('id');
-//
-//        /**IMG**/
-//        $tmpImage = $data->image;
-//        $sanitImageName = $tmpImage->getSanitizedName();
-//        $randImageName = $this->FileService->getRandomName($sanitImageName);
-//        $tmpImagePath = $tmpImage->getTemporaryFile();
-//        $tmpImagePath = $randImageName;
-//        $data->image = $tmpImagePath;
-//
-//        /**PDF**/
-//        $tmpPdf = $data->file_pdf;
-//        $sanitPdfName = $tmpPdf->getSanitizedName();
-//        $randPdfName = $this->FileService->getRandomName($sanitPdfName);
-//        $tmpPdfPath = $tmpPdf->getTemporaryFile();
-//        $tmpPdfPath = $randPdfName;
-//        $data->file_pdf = $tmpPdfPath;
-//
-//        /**EPUB**/
-//        $tmpEpub = $data->file_epub;
-//        $sanitEpubName = $tmpEpub->getSanitizedName();
-//        $randEpubName = $this->FileService->getRandomName($sanitEpubName);
-//        $tmpEpubPath = $tmpEpub->getTemporaryFile();
-//        $tmpEpubPath = $randEpubName;
-//        $data->file_epub = $tmpEpubPath;
-//
-//        if ($bookId) {
-//            $data->user_edited_id = $this->getUser()->getId();
-//            $book = $this->booksRepository
-//                ->findBookById($bookId)
-//                ->fetch();
-//            $this->FileService
-//                 ->update($tmpImage,self::IMAGE_DIR,$book->image,$randImageName);
-//            $this->FileService
-//                 ->update($tmpPdf,self::FILE_DIR.'/'.$data->title,$book->file_pdf,$randPdfName);
-//            $this->FileService
-//                 ->update($tmpEpub,self::FILE_DIR.'/'.$data->title,$book->file_epub,$randEpubName);
-//            $this->booksRepository
-//                 ->updateBook($bookId,$data);
-//            $this->flashMessage('Článek byl upraven', 'success');
-//            $this->redirect('Books:edit',$book->id);
-//
-//        } else {
-//            $data->user_published_id = $this->getUser()->getId();
-//            $data->user_edited_id = $this->getUser()->getId();
-//            $post = $this->booksRepository
-//                ->insertBook($data);
-//            $this->FileService
-//                 ->upload($tmpImage,self::IMAGE_DIR,$randImageName);
-//            $this->FileService
-//                 ->upload($tmpPdf,self::FILE_DIR.'/'.$data->title,$randPdfName);
-//            $this->FileService
-//                 ->upload($tmpEpub,self::FILE_DIR.'/'.$data->title,$randEpubName);
-//            $this->flashMessage('Článek byl přidán', 'success');
-//            $this->redirect('Books:edit',$post->id);
-//        }
+        $bookId = $this->getParameter('id');
+
+        /**IMG**/
+        $tmpImage = $data->image;
+        $sanitImageName = $tmpImage->getSanitizedName();
+        $randImageName = $this->FileService->getRandomName($sanitImageName);
+        $tmpImagePath = $tmpImage->getTemporaryFile();
+        $tmpImagePath = $randImageName;
+        $data->image = $tmpImagePath;
+
+        /**PDF**/
+        $tmpPdf = $data->file_pdf;
+        $sanitPdfName = $tmpPdf->getSanitizedName();
+        $randPdfName = $this->FileService->getRandomName($sanitPdfName);
+        $tmpPdfPath = $tmpPdf->getTemporaryFile();
+        $tmpPdfPath = $randPdfName;
+        $data->file_pdf = $tmpPdfPath;
+
+        /**EPUB**/
+        $tmpEpub = $data->file_epub;
+        $sanitEpubName = $tmpEpub->getSanitizedName();
+        $randEpubName = $this->FileService->getRandomName($sanitEpubName);
+        $tmpEpubPath = $tmpEpub->getTemporaryFile();
+        $tmpEpubPath = $randEpubName;
+        $data->file_epub = $tmpEpubPath;
+
+        if ($bookId) {
+            $data->user_edited_id = $this->getUser()->getId();
+            $book = $this->booksRepository
+                ->findBookById($bookId)
+                ->fetch();
+            $this->FileService
+                 ->update($tmpImage,self::IMAGE_DIR,$book->image,$randImageName);
+            $this->FileService
+                 ->update($tmpPdf,self::FILE_DIR.'/'.$data->title,$book->file_pdf,$randPdfName);
+            $this->FileService
+                 ->update($tmpEpub,self::FILE_DIR.'/'.$data->title,$book->file_epub,$randEpubName);
+            $this->booksRepository
+                 ->updateBook($bookId,$data);
+            $this->flashMessage('Článek byl upraven', 'success');
+            $this->redirect('Books:edit',$book->id);
+
+        } else {
+            $data->user_published_id = $this->getUser()->getId();
+            $data->user_edited_id = $this->getUser()->getId();
+            $post = $this->booksRepository
+                ->insertBook($data);
+            $this->FileService
+                 ->upload($tmpImage,self::IMAGE_DIR,$randImageName);
+            $this->FileService
+                 ->upload($tmpPdf,self::FILE_DIR.'/'.$data->title,$randPdfName);
+            $this->FileService
+                 ->upload($tmpEpub,self::FILE_DIR.'/'.$data->title,$randEpubName);
+            $this->flashMessage('Článek byl přidán', 'success');
+            $this->redirect('Books:edit',$post->id);
+        }
 
     }
 
